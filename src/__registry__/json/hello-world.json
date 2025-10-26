@@ -1,0 +1,16 @@
+{
+	"$schema": "https://shadcn-svelte.com/schema/registry-item.json",
+	"name": "hello-world",
+	"type": "registry:block",
+	"registryDependencies": [
+		"button",
+		"utils"
+	],
+	"files": [
+		{
+			"content": "<script>\r\n\timport { Button } from '$lib/components/ui/button';\r\n\timport { cn } from '$UTILS$';\r\n</script>\r\n\r\n<Button class={cn('text-2xl font-bold')}>Hello world</Button>\r\n",
+			"type": "registry:component",
+			"target": "hello-world.svelte"
+		}
+	]
+}

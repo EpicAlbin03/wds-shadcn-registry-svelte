@@ -1,0 +1,74 @@
+[
+  {
+    "title": "Action Button",
+    "description": "A button that performs an action when clicked and optionally asks for user confirmation.",
+    "path": "components/action-button",
+    "component": true,
+    "toc": [
+      {
+        "title": "Installation",
+        "url": "#installation",
+        "items": []
+      },
+      {
+        "title": "Usage",
+        "url": "#usage",
+        "items": []
+      },
+      {
+        "title": "Examples",
+        "url": "#examples",
+        "items": [
+          {
+            "title": "Default",
+            "url": "#default",
+            "items": []
+          },
+          {
+            "title": "Require Are You Sure",
+            "url": "#require-are-you-sure",
+            "items": []
+          },
+          {
+            "title": "With Error",
+            "url": "#with-error",
+            "items": []
+          }
+        ]
+      }
+    ],
+    "slug": "action-button",
+    "slugFull": "/components/action-button"
+  },
+  {
+    "title": "Loading Swap",
+    "description": "Swaps child content with a loading spinner without changing the element size.",
+    "path": "components/loading-swap",
+    "component": true,
+    "toc": [
+      {
+        "title": "Installation",
+        "url": "#installation",
+        "items": []
+      },
+      {
+        "title": "Usage",
+        "url": "#usage",
+        "items": []
+      },
+      {
+        "title": "Examples",
+        "url": "#examples",
+        "items": [
+          {
+            "title": "Large components",
+            "url": "#large-components",
+            "items": []
+          }
+        ]
+      }
+    ],
+    "slug": "loading-swap",
+    "slugFull": "/components/loading-swap"
+  }
+]

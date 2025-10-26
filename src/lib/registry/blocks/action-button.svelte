@@ -29,7 +29,7 @@
 {#if requireAreYouSure}
 	<Alert.Root open={isLoading}>
 		<Alert.Trigger {...props}>
-			{#snippet child({ props }: { props: ButtonProps })}
+			{#snippet child({ props })}
 				<Button {...props} />
 			{/snippet}
 		</Alert.Trigger>

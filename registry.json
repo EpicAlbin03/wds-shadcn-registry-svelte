@@ -36,17 +36,6 @@
 					"path": "src\\lib\\registry\\blocks\\action-button.svelte"
 				}
 			]
-		},
-		{
-			"name": "hello-world",
-			"type": "registry:block",
-			"registryDependencies": ["button", "utils"],
-			"files": [
-				{
-					"type": "registry:component",
-					"path": "src\\lib\\registry\\blocks\\hello-world.svelte"
-				}
-			]
 		}
 	]
 }
