@@ -1,0 +1,28 @@
+{
+	"$schema": "./static/schema/registry.json",
+	"name": "wds-shadcn-registry-svelte",
+	"homepage": "https://localhost:5173",
+	"overrideDependencies": ["vaul-svelte@next"],
+	"aliases": {
+		"lib": "$lib/registry/lib",
+		"ui": "$lib/registry/ui",
+		"components": "./components",
+		"utils": "$lib/utils",
+		"hooks": "$lib/registry/hooks"
+	},
+	"items": [
+		{
+			"name": "hello-world",
+			"type": "registry:component",
+			"title": "Hello World",
+			"description": "A simple hello world component",
+			"registryDependencies": ["button"],
+			"files": [
+				{
+					"path": "src/lib/registry/blocks/hello-world/hello-world.svelte",
+					"type": "registry:component"
+				}
+			]
+		}
+	]
+}

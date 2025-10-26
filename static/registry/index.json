@@ -1,0 +1,12 @@
+[
+	{
+		"name": "hello-world",
+		"title": "Hello World",
+		"type": "registry:component",
+		"description": "A simple hello world component",
+		"registryDependencies": [
+			"button"
+		],
+		"relativeUrl": "hello-world.json"
+	}
+]
