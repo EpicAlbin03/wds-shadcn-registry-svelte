@@ -12,6 +12,32 @@
 	},
 	"items": [
 		{
+			"name": "loading-swap",
+			"type": "registry:ui",
+			"registryDependencies": ["utils"],
+			"files": [
+				{
+					"type": "registry:file",
+					"path": "src\\lib\\registry\\ui\\loading-swap\\index.ts"
+				},
+				{
+					"type": "registry:file",
+					"path": "src\\lib\\registry\\ui\\loading-swap\\loading-swap.svelte"
+				}
+			]
+		},
+		{
+			"name": "action-button",
+			"type": "registry:block",
+			"registryDependencies": ["button", "loading-swap", "alert-dialog"],
+			"files": [
+				{
+					"type": "registry:component",
+					"path": "src\\lib\\registry\\blocks\\action-button.svelte"
+				}
+			]
+		},
+		{
 			"name": "hello-world",
 			"type": "registry:block",
 			"registryDependencies": ["button", "utils"],

@@ -1,5 +1,23 @@
 [
 	{
+		"name": "loading-swap",
+		"type": "registry:ui",
+		"registryDependencies": [
+			"utils"
+		],
+		"relativeUrl": "loading-swap.json"
+	},
+	{
+		"name": "action-button",
+		"type": "registry:block",
+		"registryDependencies": [
+			"button",
+			"loading-swap",
+			"alert-dialog"
+		],
+		"relativeUrl": "action-button.json"
+	},
+	{
 		"name": "hello-world",
 		"type": "registry:block",
 		"registryDependencies": [
