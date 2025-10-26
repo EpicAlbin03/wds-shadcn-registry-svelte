@@ -10,13 +10,8 @@
 	import ComponentCodeViewer from '$lib/components/component-code-viewer/component-code-viewer.svelte';
 	import Metadata from '$lib/components/metadata.svelte';
 	import DocsCopyPage from '$lib/components/docs-copy-page.svelte';
-	import { onMount } from 'svelte';
 
 	let { data } = $props();
-
-	onMount(() => {
-		console.log(data);
-	});
 
 	const Markdown = $derived(data.component);
 	const doc = $derived(data.metadata);

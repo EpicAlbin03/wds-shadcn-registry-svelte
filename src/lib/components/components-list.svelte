@@ -13,7 +13,7 @@
 >
 	{#each list as component (component.title)}
 		<a
-			href="/{component.slugFull}"
+			href="/components/{component.slug}"
 			class="flex items-center gap-2 text-lg font-medium underline-offset-4 hover:underline md:text-base"
 		>
 			{component.title}

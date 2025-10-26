@@ -55,7 +55,7 @@ function generateComponentsNav(): SidebarNavItem[] {
 	if (index) {
 		componentsNavItems.push({
 			title: index.title,
-			href: `/docs/components`,
+			href: `/components`,
 			items: []
 		});
 	}
@@ -65,7 +65,7 @@ function generateComponentsNav(): SidebarNavItem[] {
 		componentsNavItems.push({
 			title: doc.title,
 			indicator: NEW_COMPONENTS.has(doc.slug) ? 'new' : undefined,
-			href: `/docs/components/${doc.slug}`,
+			href: `/components/${doc.slug}`,
 			items: []
 		});
 	}
@@ -90,11 +90,11 @@ export const sidebarNavItems: SidebarNavItem[] = [
 export const mainNavItems: NavItem[] = [
 	{
 		title: 'Docs',
-		href: '/docs'
+		href: '/'
 	},
 	{
 		title: 'Components',
-		href: '/docs/components'
+		href: '/components'
 	}
 ];
 
