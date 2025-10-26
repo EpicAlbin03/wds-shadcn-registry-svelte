@@ -14,9 +14,9 @@ export default defineConfig(
 	includeIgnoreFile(gitignorePath),
 	js.configs.recommended,
 	...ts.configs.recommended,
-	...svelte.configs.recommended,
+	...svelte.configs['flat/recommended'],
 	prettier,
-	...svelte.configs.prettier,
+	...svelte.configs['flat/prettier'],
 	{
 		languageOptions: {
 			globals: { ...globals.browser, ...globals.node }
@@ -31,11 +31,38 @@ export default defineConfig(
 		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
 		languageOptions: {
 			parserOptions: {
-				projectService: true,
+				// Only uncomment this if you want it to take 3 minutes https://github.com/sveltejs/eslint-plugin-svelte/issues/1084
+				// projectService: true,
 				extraFileExtensions: ['.svelte'],
 				parser: ts.parser,
 				svelteConfig
 			}
+		},
+		rules: {
+			'svelte/no-useless-mustaches': 'warn',
+			'svelte/no-navigation-without-resolve': 'off'
 		}
+	},
+	{
+		rules: {
+			'@typescript-eslint/no-unused-vars': [
+				'error',
+				{
+					argsIgnorePattern: '^_',
+					varsIgnorePattern: '^_'
+				}
+			],
+			'@typescript-eslint/no-unused-expressions': 'off'
+		}
+	},
+	{
+		ignores: [
+			'build/',
+			'.svelte-kit/',
+			'dist/',
+			'.svelte-kit/**/*',
+			'docs/.svelte-kit/**/*',
+			'.svelte-kit'
+		]
 	}
 );
