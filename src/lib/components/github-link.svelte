@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { siteConfig } from '$lib/config.js';
-	import Button from '$lib/registry/ui/button/button.svelte';
+	import Button from '$lib/components/ui/button/button.svelte';
 	import GithubIcon from './github.svelte';
 	import { FALLBACK_STAR_COUNT } from '$lib/constants.js';
 	import { onMount } from 'svelte';

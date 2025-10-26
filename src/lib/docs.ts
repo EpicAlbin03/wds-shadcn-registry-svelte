@@ -1,8 +1,8 @@
-import { components, installation } from '$content/index.js';
+import { components, gettingStarted } from '$content/index.js';
 import { error } from '@sveltejs/kit';
 import type { Component } from 'svelte';
 
-const allDocs = [...components, ...installation];
+const allDocs = [...components, ...gettingStarted];
 
 type DocResolver = () => Promise<{ default: Component; metadata: components }>;
 type DocMetadata = (typeof allDocs)[number];

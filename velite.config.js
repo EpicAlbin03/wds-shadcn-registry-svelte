@@ -25,23 +25,23 @@ const docSchema = s
 		};
 	});
 
+const gettingStarted = defineCollection({
+	name: 'gettingStarted',
+	pattern: './*.md',
+	schema: docSchema
+});
+
 const components = defineCollection({
 	name: 'components',
 	pattern: './components/**/*.md',
 	schema: docSchema
 });
 
-const installation = defineCollection({
-	name: 'installation',
-	pattern: './installation/**/*.md',
-	schema: docSchema
-});
-
 export default defineConfig({
 	root: './content',
 	collections: {
-		components,
-		installation
+		gettingStarted,
+		components
 	},
 	output: { assets: 'static' }
 });

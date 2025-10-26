@@ -5,7 +5,7 @@ import type { EntryGenerator, PageLoad } from './$types.js';
 export const prerender = true;
 
 export const entries: EntryGenerator = () => {
-	console.info('Prerendering /docs');
+	console.info('Prerendering /');
 	const modules = import.meta.glob('/content/**/*.md');
 	const entries = [];
 

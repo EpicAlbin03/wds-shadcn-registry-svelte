@@ -26,12 +26,12 @@ function generateGetStartedNav(): SidebarNavItem[] {
 	const getStartedNavItems: SidebarNavItem[] = [
 		{
 			title: 'Introduction',
-			href: '/docs',
+			href: '/',
 			items: []
 		},
 		{
 			title: 'Installation',
-			href: '/docs/installation',
+			href: '/installation',
 			items: []
 		},
 		{
@@ -41,7 +41,7 @@ function generateGetStartedNav(): SidebarNavItem[] {
 		},
 		{
 			title: 'Changelog',
-			href: '/docs/changelog',
+			href: '/changelog',
 			items: []
 		}
 	];

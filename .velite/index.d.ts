@@ -4,8 +4,8 @@ import type __vc from '../velite.config.js'
 
 type Collections = typeof __vc.collections
 
+export type gettingStarted = Collections['gettingStarted']['schema']['_output']
+export declare const gettingStarted: gettingStarted[]
+
 export type components = Collections['components']['schema']['_output']
 export declare const components: components[]
-
-export type installation = Collections['installation']['schema']['_output']
-export declare const installation: installation[]

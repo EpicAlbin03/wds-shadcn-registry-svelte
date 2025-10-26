@@ -1,0 +1,47 @@
+[
+  {
+    "title": "Changelog",
+    "description": "Latest updates and announcements.",
+    "path": "changelog",
+    "component": false,
+    "toc": [
+      {
+        "title": "Changelog",
+        "url": "#changelog",
+        "items": []
+      }
+    ],
+    "slug": "",
+    "slugFull": "/changelog"
+  },
+  {
+    "title": "Introduction",
+    "description": "Re-usable components built with Bits UI and Tailwind CSS.",
+    "path": "index",
+    "component": false,
+    "toc": [
+      {
+        "title": "Introduction",
+        "url": "#introduction",
+        "items": []
+      }
+    ],
+    "slug": "",
+    "slugFull": "/index"
+  },
+  {
+    "title": "Installation",
+    "description": "How to setup shadcn-svelte in a SvelteKit project.",
+    "path": "installation",
+    "component": false,
+    "toc": [
+      {
+        "title": "Installation",
+        "url": "#installation",
+        "items": []
+      }
+    ],
+    "slug": "",
+    "slugFull": "/installation"
+  }
+]

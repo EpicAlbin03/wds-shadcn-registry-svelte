@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { cn } from '$lib/utils.js';
-	import { Button, type ButtonProps } from '$lib/registry/ui/button/index.js';
+	import { Button, type ButtonProps } from '$lib/components/ui/button/index.js';
 	import * as Popover from '$lib/components/ui/popover/index.js';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import { mainNavItems, sidebarNavItems } from '$lib/navigation.js';
