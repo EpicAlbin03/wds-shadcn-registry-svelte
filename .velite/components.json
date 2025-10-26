@@ -41,6 +41,15 @@
     "slugFull": "/components/action-button"
   },
   {
+    "title": "Components",
+    "description": "Here you can find all the components available in the library. We are working on adding more components.",
+    "path": "components",
+    "component": false,
+    "toc": [],
+    "slug": "",
+    "slugFull": "/components"
+  },
+  {
     "title": "Loading Swap",
     "description": "Swaps child content with a loading spinner without changing the element size.",
     "path": "components/loading-swap",
