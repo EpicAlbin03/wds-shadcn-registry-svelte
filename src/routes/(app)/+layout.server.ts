@@ -8,3 +8,5 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
 
 	return { userConfig };
 };
+
+export const prerender = true;
