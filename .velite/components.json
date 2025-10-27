@@ -115,5 +115,41 @@
     ],
     "slug": "number-input",
     "slugFull": "/components/number-input"
+  },
+  {
+    "title": "Password Input",
+    "description": "An input that can toggle visibility of the password text and check the strength of the password.",
+    "path": "components/password-input",
+    "component": true,
+    "toc": [
+      {
+        "title": "Installation",
+        "url": "#installation",
+        "items": []
+      },
+      {
+        "title": "Usage",
+        "url": "#usage",
+        "items": []
+      },
+      {
+        "title": "Examples",
+        "url": "#examples",
+        "items": [
+          {
+            "title": "With Strength Checker",
+            "url": "#with-strength-checker",
+            "items": []
+          },
+          {
+            "title": "Form",
+            "url": "#form",
+            "items": []
+          }
+        ]
+      }
+    ],
+    "slug": "password-input",
+    "slugFull": "/components/password-input"
   }
 ]

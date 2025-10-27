@@ -59,6 +59,25 @@
 					"path": "src\\lib\\registry\\ui\\number-input\\number-input.svelte"
 				}
 			]
+		},
+		{
+			"name": "password-input",
+			"type": "registry:ui",
+			"registryDependencies": ["utils", "tooltip", "input-group"],
+			"files": [
+				{
+					"type": "registry:file",
+					"path": "src\\lib\\registry\\ui\\password-input\\index.ts"
+				},
+				{
+					"type": "registry:file",
+					"path": "src\\lib\\registry\\ui\\password-input\\password-input-strength-checker.svelte"
+				},
+				{
+					"type": "registry:file",
+					"path": "src\\lib\\registry\\ui\\password-input\\password-input.svelte"
+				}
+			]
 		}
 	]
 }

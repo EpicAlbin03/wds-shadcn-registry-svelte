@@ -29,4 +29,13 @@ export const Index = {
 "number-input-group": {
 	files: ["src/lib/registry/examples/number-input-group.svelte"],
 },
+"password-input-demo": {
+	files: ["src/lib/registry/examples/password-input-demo.svelte"],
+},
+"password-input-form": {
+	files: ["src/lib/registry/examples/password-input-form.svelte"],
+},
+"password-input-strength": {
+	files: ["src/lib/registry/examples/password-input-strength.svelte"],
+},
 }

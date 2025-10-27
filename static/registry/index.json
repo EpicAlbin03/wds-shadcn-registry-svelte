@@ -25,5 +25,15 @@
 			"input"
 		],
 		"relativeUrl": "number-input.json"
+	},
+	{
+		"name": "password-input",
+		"type": "registry:ui",
+		"registryDependencies": [
+			"utils",
+			"tooltip",
+			"input-group"
+		],
+		"relativeUrl": "password-input.json"
 	}
 ]
