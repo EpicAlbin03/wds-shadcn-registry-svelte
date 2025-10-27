@@ -20,7 +20,7 @@
 			className
 		)}
 	>
-		{children}
+		{@render children?.()}
 	</div>
 	<div
 		class={cn(

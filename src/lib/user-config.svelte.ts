@@ -4,18 +4,22 @@ import { z } from 'zod/v4';
 export const USER_CONFIG_COOKIE_NAME = 'wds_user_config';
 
 const layoutSchema = z.enum(['fixed', 'full']).default('full');
+const installationTypeSchema = z.enum(['cli', 'manual']).default('cli');
 const packageManagerSchema = z.enum(['npm', 'yarn', 'pnpm', 'bun']).default('pnpm');
 
 export type Layout = z.infer<typeof layoutSchema>;
+export type InstallationType = z.infer<typeof installationTypeSchema>;
 export type PackageManager = z.infer<typeof packageManagerSchema>;
 
 export const userConfigSchema = z
 	.object({
 		layout: layoutSchema,
+		installationType: installationTypeSchema,
 		packageManager: packageManagerSchema
 	})
 	.default({
 		layout: 'full',
+		installationType: 'cli',
 		packageManager: 'pnpm'
 	});
 

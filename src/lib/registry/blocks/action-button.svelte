@@ -8,7 +8,7 @@
 		action: () => Promise<{ error: boolean; message?: string }>;
 		requireAreYouSure?: boolean;
 		areYouSureDescription?: string;
-	} & ButtonProps;
+	} & Omit<ButtonProps, 'id'> & { id?: string };
 
 	let {
 		action,
@@ -21,7 +21,9 @@
 	let isLoading = $state(false);
 
 	async function performAction() {
+		isLoading = true;
 		const data = await action();
+		isLoading = false;
 		if (data.error) toast.error(data.message ?? 'Error');
 	}
 </script>
@@ -30,7 +32,9 @@
 	<Alert.Root open={isLoading}>
 		<Alert.Trigger {...props}>
 			{#snippet child({ props })}
-				<Button {...props} />
+				<Button {...props}>
+					{@render children?.()}
+				</Button>
 			{/snippet}
 		</Alert.Trigger>
 		<Alert.Content>
@@ -42,7 +46,7 @@
 			</Alert.Header>
 			<Alert.Footer>
 				<Alert.Cancel>Cancel</Alert.Cancel>
-				<Alert.Action disabled={isLoading} onClick={performAction}>
+				<Alert.Action disabled={isLoading} onclick={performAction}>
 					<LoadingSwap {isLoading}>Yes</LoadingSwap>
 				</Alert.Action>
 			</Alert.Footer>

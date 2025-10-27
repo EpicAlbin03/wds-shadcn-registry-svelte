@@ -16,28 +16,22 @@
   },
   {
     "title": "Introduction",
-    "description": "Re-usable components built with Bits UI and Tailwind CSS.",
+    "description": "WDS Shadcn Registry is a collection of accessible components built for use with Shadcn.",
     "path": "index",
     "component": false,
-    "toc": [
-      {
-        "title": "Introduction",
-        "url": "#introduction",
-        "items": []
-      }
-    ],
+    "toc": [],
     "slug": "",
     "slugFull": "/index"
   },
   {
     "title": "Installation",
-    "description": "How to setup shadcn-svelte in a SvelteKit project.",
+    "description": "How to install WDS Shadcn components in your project.",
     "path": "installation",
     "component": false,
     "toc": [
       {
-        "title": "Installation",
-        "url": "#installation",
+        "title": "Example",
+        "url": "#example",
         "items": []
       }
     ],

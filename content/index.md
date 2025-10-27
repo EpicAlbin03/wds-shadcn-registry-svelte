@@ -1,8 +1,10 @@
 ---
 title: Introduction
-description: Re-usable components built with Bits UI and Tailwind CSS.
+description: WDS Shadcn Registry is a collection of accessible components built for use with Shadcn.
 ---
 
-## Introduction
+An unofficial, community-led [Svelte](https://svelte.dev) port of [wds-shadcn-registry](https://wds-shadcn-registry.netlify.app). We are not affiliated with [Web Dev Simplified](https://x.com/DevSimplified).
 
-hello
+Just like Shadcn, this is not a component library. Instead it is a collection of components that you can use to build your own component library. These components are designed to be accessible and customizable, so you can easily integrate them into your projects.
+
+Each component in this library is built to solve specific problems that most developers face while building web applications (such as asynchronous actions, form validation, etc.).

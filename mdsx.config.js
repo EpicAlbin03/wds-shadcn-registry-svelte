@@ -1,60 +1,60 @@
 // @ts-check
-import { readFileSync } from "node:fs";
-import process from "node:process";
-import { join, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
-import prettier from "@prettier/sync";
-import rehypePrettyCode from "rehype-pretty-code";
-import rehypeSlug from "rehype-slug";
-import { codeImport } from "remark-code-import";
-import remarkGfm from "remark-gfm";
-import { visit } from "unist-util-visit";
-import { u } from "unist-builder";
-import { createHighlighterCore } from "shiki/core";
-import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
-import { defineConfig } from "mdsx";
-import { Index } from "./src/__registry__/index.js";
+import { readFileSync } from 'node:fs';
+import process from 'node:process';
+import { join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import prettier from '@prettier/sync';
+import rehypePrettyCode from 'rehype-pretty-code';
+import rehypeSlug from 'rehype-slug';
+import { codeImport } from 'remark-code-import';
+import remarkGfm from 'remark-gfm';
+import { visit } from 'unist-util-visit';
+import { u } from 'unist-builder';
+import { createHighlighterCore } from 'shiki/core';
+import { createJavaScriptRegexEngine } from 'shiki/engine/javascript';
+import { defineConfig } from 'mdsx';
+import { Index } from './src/__registry__/index.js';
 
 /** @type {import('prettier').Config} */
 const codeBlockPrettierConfig = {
 	useTabs: false,
 	tabWidth: 2,
 	singleQuote: false,
-	trailingComma: "none",
+	trailingComma: 'none',
 	printWidth: 80,
-	endOfLine: "lf",
-	parser: "svelte",
-	plugins: ["prettier-plugin-svelte"],
+	endOfLine: 'lf',
+	parser: 'svelte',
+	plugins: ['prettier-plugin-svelte'],
 	overrides: [
 		{
-			files: "*.svelte",
+			files: '*.svelte',
 			options: {
-				parser: "svelte",
-			},
-		},
+				parser: 'svelte'
+			}
+		}
 	],
-	bracketSameLine: false,
+	bracketSameLine: false
 };
 
-const __dirname = fileURLToPath(new URL(".", import.meta.url));
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const jsEngine = createJavaScriptRegexEngine();
 
 export async function createHighlighter() {
 	if (!globalThis.__shikiHighlighter) {
 		globalThis.__shikiHighlighter = await createHighlighterCore({
 			themes: [
-				import("@shikijs/themes/github-dark"),
-				import("@shikijs/themes/github-light-default"),
+				import('@shikijs/themes/github-dark'),
+				import('@shikijs/themes/github-light-default')
 			],
 			langs: [
-				import("@shikijs/langs/typescript"),
-				import("@shikijs/langs/svelte"),
-				import("@shikijs/langs/css"),
-				import("@shikijs/langs/json"),
-				import("@shikijs/langs/bash"),
-				import("@shikijs/langs/astro"),
+				import('@shikijs/langs/typescript'),
+				import('@shikijs/langs/svelte'),
+				import('@shikijs/langs/css'),
+				import('@shikijs/langs/json'),
+				import('@shikijs/langs/bash'),
+				import('@shikijs/langs/astro')
 			],
-			engine: jsEngine,
+			engine: jsEngine
 		});
 	}
 	return globalThis.__shikiHighlighter;
@@ -72,8 +72,8 @@ export async function createHighlighter() {
  */
 const prettyCodeOptions = {
 	theme: {
-		dark: "github-dark",
-		light: "github-light-default",
+		dark: 'github-dark',
+		light: 'github-light-default'
 	},
 	keepBackground: false,
 	// @ts-expect-error - shh
@@ -82,19 +82,19 @@ const prettyCodeOptions = {
 		// Prevent lines from collapsing in `display: grid` mode, and allow empty
 		// lines to be copy/pasted
 		if (node.children.length === 0) {
-			node.children = [{ type: "text", value: " " }];
+			node.children = [{ type: 'text', value: ' ' }];
 		}
 	},
 	onVisitHighlightedLine(node) {
-		node.properties.className = ["line--highlighted"];
+		node.properties.className = ['line--highlighted'];
 	},
 	onVisitHighlightedChars(node) {
-		node.properties.className = ["chars--highlighted"];
-	},
+		node.properties.className = ['chars--highlighted'];
+	}
 };
 
 export const mdsxConfig = defineConfig({
-	extensions: [".md"],
+	extensions: ['.md'],
 	remarkPlugins: [remarkGfm, codeImport, remarkRemovePrettierIgnore],
 	rehypePlugins: [
 		rehypeSlug,
@@ -102,13 +102,13 @@ export const mdsxConfig = defineConfig({
 		rehypePreData,
 		[rehypePrettyCode, prettyCodeOptions],
 
-		rehypeHandleMetadata,
+		rehypeHandleMetadata
 	],
 	blueprints: {
 		default: {
-			path: resolve(__dirname, "./src/lib/components/mdsx/blueprint.svelte"),
-		},
-	},
+			path: resolve(__dirname, './src/lib/components/mdsx/blueprint.svelte')
+		}
+	}
 });
 
 /**
@@ -128,10 +128,10 @@ export const mdsxConfig = defineConfig({
  */
 function remarkRemovePrettierIgnore() {
 	return async (tree) => {
-		visit(tree, "code", (node) => {
+		visit(tree, 'code', (node) => {
 			node.value = node.value
-				.replaceAll("<!-- prettier-ignore -->\n", "")
-				.replaceAll("// prettier-ignore\n", "");
+				.replaceAll('<!-- prettier-ignore -->\n', '')
+				.replaceAll('// prettier-ignore\n', '');
 		});
 	};
 }
@@ -142,16 +142,16 @@ function remarkRemovePrettierIgnore() {
 function rehypePreData() {
 	return (tree) => {
 		visit(tree, (node) => {
-			if (node?.type === "element" && node?.tagName === "pre") {
+			if (node?.type === 'element' && node?.tagName === 'pre') {
 				const [codeEl] = node.children;
-				if (codeEl.type !== "element") return;
-				if (codeEl.tagName !== "code") return;
+				if (codeEl.type !== 'element') return;
+				if (codeEl.tagName !== 'code') return;
 
 				if (
 					codeEl.data &&
-					"meta" in codeEl.data &&
+					'meta' in codeEl.data &&
 					codeEl.data.meta &&
-					typeof codeEl.data.meta === "string"
+					typeof codeEl.data.meta === 'string'
 				) {
 					// Extract event from meta and pass it down the tree.
 					const regex = /event="([^"]*)"/;
@@ -159,7 +159,7 @@ function rehypePreData() {
 					if (match) {
 						// @ts-expect-error - this is fine
 						node.__event__ = match ? match[1] : null;
-						codeEl.data.meta = codeEl.data.meta.replace(regex, "");
+						codeEl.data.meta = codeEl.data.meta.replace(regex, '');
 					}
 				}
 
@@ -184,9 +184,9 @@ export function rehypeComponentExample() {
 		const titleRegex = /title="([^"]+)"/;
 		visit(tree, (node, index, parent) => {
 			if (
-				node?.type === "raw" &&
-				(node?.value?.startsWith("<ComponentPreview") ||
-					node?.value?.startsWith("<ComponentSource"))
+				node?.type === 'raw' &&
+				(node?.value?.startsWith('<ComponentPreview') ||
+					node?.value?.startsWith('<ComponentSource'))
 			) {
 				const match = node.value.match(nameRegex);
 				const name = match ? match[1] : null;
@@ -202,44 +202,44 @@ export function rehypeComponentExample() {
 
 					const files = component.files;
 					if (!files) return;
-					const src = files[0]?.replace("/lib/", "/src/lib/");
+					const src = files[0];
 
 					let sourceCode = getComponentSourceFileContent(src);
 					if (!sourceCode || sourceCode === null) return;
 
-					sourceCode = sourceCode.replaceAll("$lib/registry/", "$lib/components/");
-					sourceCode = sourceCode.replaceAll("$lib/registry/", "$lib/components/");
+					sourceCode = sourceCode.replaceAll('$lib/registry/', '$lib/components/');
+					sourceCode = sourceCode.replaceAll('$lib/registry/', '$lib/components/');
 
 					const meta = title
 						? {
-								meta: `title="${title}" showLineNumbers`,
+								meta: `title="${title}" showLineNumbers`
 							}
 						: {
-								meta: `showLineNumbers`,
+								meta: `showLineNumbers`
 							};
 
-					const sourceCodeNode = u("element", {
-						tagName: "pre",
+					const sourceCodeNode = u('element', {
+						tagName: 'pre',
 						properties: {
 							__src__: src,
-							className: ["code"],
+							className: ['code']
 						},
 						children: [
-							u("element", {
-								tagName: "code",
+							u('element', {
+								tagName: 'code',
 								properties: {
-									className: [`language-svelte`],
+									className: [`language-svelte`]
 								},
 								attributes: {},
 								data: meta,
 								children: [
 									{
-										type: "text",
-										value: sourceCode.replace(/^\n+/, ""),
-									},
-								],
-							}),
-						],
+										type: 'text',
+										value: sourceCode.replace(/^\n+/, '')
+									}
+								]
+							})
+						]
 					});
 					if (!index) return;
 					// @ts-expect-error - this is fine
@@ -262,23 +262,23 @@ export function rehypeComponentExample() {
 function rehypeHandleMetadata() {
 	return async (tree) => {
 		visit(tree, (node) => {
-			if (node?.type === "element" && node?.tagName === "figure") {
-				if (!("data-rehype-pretty-code-figure" in node.properties)) {
+			if (node?.type === 'element' && node?.tagName === 'figure') {
+				if (!('data-rehype-pretty-code-figure' in node.properties)) {
 					return;
 				}
 
 				const preElement = node.children.at(-1);
-				if (preElement && "tagName" in preElement && preElement.tagName !== "pre") {
+				if (preElement && 'tagName' in preElement && preElement.tagName !== 'pre') {
 					return;
 				}
 
 				const firstChild = node.children.at(0);
 
-				if (firstChild && "tagName" in firstChild && firstChild.tagName === "figcaption") {
-					node.properties["data-metadata"] = "";
+				if (firstChild && 'tagName' in firstChild && firstChild.tagName === 'figcaption') {
+					node.properties['data-metadata'] = '';
 					const lastChild = node.children.at(-1);
-					if (lastChild && "properties" in lastChild) {
-						lastChild.properties["data-metadata"] = "";
+					if (lastChild && 'properties' in lastChild) {
+						lastChild.properties['data-metadata'] = '';
 					}
 				}
 			}
@@ -286,17 +286,14 @@ function rehypeHandleMetadata() {
 	};
 }
 
-function getComponentSourceFileContent(src = "") {
-	const newSrc = src.replace("../", "./");
+function getComponentSourceFileContent(src = '') {
+	const newSrc = src.replace('../', './');
 	if (!newSrc) return null;
 
 	// Read the source file.
 	const filePath = join(process.cwd(), newSrc);
 
-	const formattedSource = prettier.format(
-		readFileSync(filePath, "utf-8"),
-		codeBlockPrettierConfig
-	);
+	const formattedSource = prettier.format(readFileSync(filePath, 'utf-8'), codeBlockPrettierConfig);
 
 	return formattedSource.trim();
 }

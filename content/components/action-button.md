@@ -4,32 +4,51 @@ description: A button that performs an action when clicked and optionally asks f
 component: true
 ---
 
-<!-- import CodePreview from "@/components/markdown/code-preview/code-preview.astro"
-import Installation from "@/components/markdown/installation-tabs/installation-tabs.astro"
-import ToastProvider from "@/components/markdown/toast-provider.astro" -->
+<script>
+	import ComponentPreview from "$lib/components/component-preview.svelte";
+	import PMAddComp from "$lib/components/pm-add-comp.svelte";
+	import Steps from "$lib/components/steps.svelte";
+	import InstallTabs from "$lib/components/install-tabs.svelte";
+	import Step from "$lib/components/step.svelte";
+</script>
 
-<!-- <CodePreview demo="action-button/basic" /> -->
+<ComponentPreview name="action-button-demo">
+
+<div></div>
+
+</ComponentPreview>
 
 ## Installation
 
-<!-- <Installation registryItem="action-button" /> -->
+<InstallTabs>
+{#snippet cli()}
+<PMAddComp name="action-button" />
+{/snippet}
+{#snippet manual()}
+<Steps>
+
+<Step>
+
+Copy and paste the component source files linked at the top of this page into your project.
+
+</Step>
+
+</Steps>
+{/snippet}
+</InstallTabs>
 
 ## Usage
 
-```tsx
-import { ActionButton } from '@/components/ui/action-button';
-```
+```svelte
+<script lang="ts">
+	import { ActionButton } from '$lib/components/ui/action-button';
+	import { updateSettings } from '$lib/actions/settings';
 
-```tsx
-import { updateSettings } from "@/actions/settings"
+	const settings = { name: 'Kyle' };
+</script>
 
-const settings = { name: "Kyle" }
-
-<ActionButton
-  action={updateSettings.bind(null, settings)}
-  requireAreYouSure
->
-  Save Settings
+<ActionButton action={updateSettings.bind(null, settings)} requireAreYouSure>
+	Save Settings
 </ActionButton>
 ```
 
@@ -37,14 +56,24 @@ const settings = { name: "Kyle" }
 
 ### Default
 
-<!-- <CodePreview demo="action-button/default" /> -->
+<ComponentPreview name="action-button-default">
+
+<div></div>
+
+</ComponentPreview>
 
 ### Require Are You Sure
 
-<!-- <CodePreview demo="action-button/require-are-you-sure" /> -->
+<ComponentPreview name="action-button-are-you-sure">
+
+<div></div>
+
+</ComponentPreview>
 
 ### With Error
 
-<!-- <CodePreview demo="action-button/error" />
+<ComponentPreview name="action-button-error">
 
-<ToastProvider /> -->
+<div></div>
+
+</ComponentPreview>

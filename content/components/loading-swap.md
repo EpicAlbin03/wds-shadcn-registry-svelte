@@ -4,22 +4,46 @@ description: Swaps child content with a loading spinner without changing the ele
 component: true
 ---
 
-<!-- import CodePreview from "@/components/markdown/code-preview/code-preview.astro"
-import Installation from "@/components/markdown/installation-tabs/installation-tabs.astro" -->
+<script>
+	import ComponentPreview from "$lib/components/component-preview.svelte";
+	import PMAddComp from "$lib/components/pm-add-comp.svelte";
+	import Steps from "$lib/components/steps.svelte";
+	import InstallTabs from "$lib/components/install-tabs.svelte";
+	import Step from "$lib/components/step.svelte";
+</script>
 
-<!-- <CodePreview demo="loading-swap/basic" /> -->
+<ComponentPreview name="loading-swap-demo">
+
+<div></div>
+
+</ComponentPreview>
 
 ## Installation
 
-<!-- <Installation registryItem="loading-swap" /> -->
+<InstallTabs>
+{#snippet cli()}
+<PMAddComp name="loading-swap" />
+{/snippet}
+{#snippet manual()}
+<Steps>
+
+<Step>
+
+Copy and paste the component source files linked at the top of this page into your project.
+
+</Step>
+
+</Steps>
+{/snippet}
+</InstallTabs>
 
 ## Usage
 
-```tsx
-import { LoadingSwap } from '@/components/ui/loading-swap';
-```
+```svelte
+<script lang="ts">
+	import { LoadingSwap } from '$lib/components/ui/loading-swap';
+</script>
 
-```tsx
 <LoadingSwap isLoading>Search</LoadingSwap>
 ```
 
@@ -27,4 +51,8 @@ import { LoadingSwap } from '@/components/ui/loading-swap';
 
 ### Large components
 
-<!-- <CodePreview demo="loading-swap/large-component" /> -->
+<ComponentPreview name="loading-swap-large">
+
+<div></div>
+
+</ComponentPreview>
