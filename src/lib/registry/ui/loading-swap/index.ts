@@ -2,8 +2,8 @@ import Root, { type LoadingSwapProps } from './loading-swap.svelte';
 
 export {
 	Root,
-	type LoadingSwapProps as Props,
+	type LoadingSwapProps,
 	//
 	Root as LoadingSwap,
-	type LoadingSwapProps
+	type LoadingSwapProps as Props
 };

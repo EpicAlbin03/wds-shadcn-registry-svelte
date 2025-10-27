@@ -79,5 +79,41 @@
     ],
     "slug": "loading-swap",
     "slugFull": "/components/loading-swap"
+  },
+  {
+    "title": "Number Input",
+    "description": "An input that returns a number value and automatically handles invalid inputs.",
+    "path": "components/number-input",
+    "component": true,
+    "toc": [
+      {
+        "title": "Installation",
+        "url": "#installation",
+        "items": []
+      },
+      {
+        "title": "Usage",
+        "url": "#usage",
+        "items": []
+      },
+      {
+        "title": "Examples",
+        "url": "#examples",
+        "items": [
+          {
+            "title": "With Input Group",
+            "url": "#with-input-group",
+            "items": []
+          },
+          {
+            "title": "Form",
+            "url": "#form",
+            "items": []
+          }
+        ]
+      }
+    ],
+    "slug": "number-input",
+    "slugFull": "/components/number-input"
   }
 ]

@@ -20,4 +20,13 @@ export const Index = {
 "loading-swap-large": {
 	files: ["src/lib/registry/examples/loading-swap-large.svelte"],
 },
+"number-input-demo": {
+	files: ["src/lib/registry/examples/number-input-demo.svelte"],
+},
+"number-input-form": {
+	files: ["src/lib/registry/examples/number-input-form.svelte"],
+},
+"number-input-group": {
+	files: ["src/lib/registry/examples/number-input-group.svelte"],
+},
 }

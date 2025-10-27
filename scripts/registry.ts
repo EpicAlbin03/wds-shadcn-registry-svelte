@@ -22,6 +22,7 @@ export async function buildRegistry(): Promise<RegistryItems> {
 		ui: path.resolve(registryRootPath, 'ui'),
 		examples: path.resolve(registryRootPath, 'examples'),
 		blocks: path.resolve(registryRootPath, 'blocks'),
+		components: path.resolve(registryRootPath, 'components'),
 		hooks: path.resolve(registryRootPath, 'hooks'),
 		lib: path.resolve(registryRootPath, 'lib')
 	};
@@ -30,6 +31,7 @@ export async function buildRegistry(): Promise<RegistryItems> {
 		crawlUI(paths.ui),
 		crawlExamples(paths.examples),
 		crawlBlocks(paths.blocks),
+		crawlComponents(paths.components),
 		crawlHooks(paths.hooks),
 		crawlLib(paths.lib)
 	]);
@@ -184,6 +186,32 @@ async function crawlBlocks(rootPath: string): Promise<RegistryItems> {
 		items.push({
 			name,
 			type: 'registry:block',
+			files: [{ path: relativePath, type: 'registry:component' }],
+			registryDependencies: Array.from(registryDependencies)
+		});
+	}
+
+	return items;
+}
+
+async function crawlComponents(rootPath: string): Promise<RegistryItems> {
+	const dir = fs.readdirSync(rootPath, { withFileTypes: true });
+	const items: RegistryItems = [];
+
+	for (const dirent of dir) {
+		if (!dirent.isFile()) continue;
+
+		const [name] = dirent.name.split('.svelte');
+
+		const filepath = path.join(rootPath, dirent.name);
+		const source = fs.readFileSync(filepath, { encoding: 'utf8' });
+		const relativePath = path.relative(process.cwd(), filepath);
+
+		const { registryDependencies } = await getFileDependencies(filepath, source);
+
+		items.push({
+			name,
+			type: 'registry:component',
 			files: [{ path: relativePath, type: 'registry:component' }],
 			registryDependencies: Array.from(registryDependencies)
 		});

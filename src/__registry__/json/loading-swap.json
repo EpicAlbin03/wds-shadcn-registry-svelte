@@ -10,7 +10,7 @@
 	],
 	"files": [
 		{
-			"content": "import Root, { type LoadingSwapProps } from './loading-swap.svelte';\r\n\r\nexport {\r\n\tRoot,\r\n\ttype LoadingSwapProps as Props,\r\n\t//\r\n\tRoot as LoadingSwap,\r\n\ttype LoadingSwapProps\r\n};\r\n",
+			"content": "import Root, { type LoadingSwapProps } from './loading-swap.svelte';\r\n\r\nexport {\r\n\tRoot,\r\n\ttype LoadingSwapProps,\r\n\t//\r\n\tRoot as LoadingSwap,\r\n\ttype LoadingSwapProps as Props\r\n};\r\n",
 			"type": "registry:file",
 			"target": "loading-swap/index.ts"
 		},

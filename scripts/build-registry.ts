@@ -65,7 +65,7 @@ export async function build(): Promise<void> {
 	const ITEM_TYPES: RegistryItemType[] = [
 		'registry:ui',
 		'registry:hook',
-		'registry:style',
+		'registry:component',
 		'registry:lib',
 		'registry:block'
 	];

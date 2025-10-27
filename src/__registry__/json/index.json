@@ -1,5 +1,15 @@
 [
 	{
+		"name": "action-button",
+		"type": "registry:ui",
+		"registryDependencies": [
+			"button",
+			"loading-swap",
+			"alert-dialog"
+		],
+		"relativeUrl": "action-button.json"
+	},
+	{
 		"name": "loading-swap",
 		"type": "registry:ui",
 		"registryDependencies": [
@@ -8,13 +18,12 @@
 		"relativeUrl": "loading-swap.json"
 	},
 	{
-		"name": "action-button",
-		"type": "registry:block",
+		"name": "number-input",
+		"type": "registry:ui",
 		"registryDependencies": [
-			"button",
-			"loading-swap",
-			"alert-dialog"
+			"utils",
+			"input"
 		],
-		"relativeUrl": "action-button.json"
+		"relativeUrl": "number-input.json"
 	}
 ]

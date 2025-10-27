@@ -4,7 +4,7 @@
 	import { LoadingSwap } from '$lib/registry/ui/loading-swap';
 	import * as Alert from '$lib/components/ui/alert-dialog';
 
-	type Props = {
+	export type ActionButtonProps = {
 		action: () => Promise<{ error: boolean; message?: string }>;
 		requireAreYouSure?: boolean;
 		areYouSureDescription?: string;
@@ -16,7 +16,7 @@
 		areYouSureDescription = 'This action cannot be undone.',
 		children,
 		...props
-	}: Props = $props();
+	}: ActionButtonProps = $props();
 
 	let isLoading = $state(false);
 

@@ -12,6 +12,21 @@
 	},
 	"items": [
 		{
+			"name": "action-button",
+			"type": "registry:ui",
+			"registryDependencies": ["button", "loading-swap", "alert-dialog"],
+			"files": [
+				{
+					"type": "registry:file",
+					"path": "src\\lib\\registry\\ui\\action-button\\action-button.svelte"
+				},
+				{
+					"type": "registry:file",
+					"path": "src\\lib\\registry\\ui\\action-button\\index.ts"
+				}
+			]
+		},
+		{
 			"name": "loading-swap",
 			"type": "registry:ui",
 			"registryDependencies": ["utils"],
@@ -27,13 +42,21 @@
 			]
 		},
 		{
-			"name": "action-button",
-			"type": "registry:block",
-			"registryDependencies": ["button", "loading-swap", "alert-dialog"],
+			"name": "number-input",
+			"type": "registry:ui",
+			"registryDependencies": ["utils", "input"],
 			"files": [
 				{
-					"type": "registry:component",
-					"path": "src\\lib\\registry\\blocks\\action-button.svelte"
+					"type": "registry:file",
+					"path": "src\\lib\\registry\\ui\\number-input\\index.ts"
+				},
+				{
+					"type": "registry:file",
+					"path": "src\\lib\\registry\\ui\\number-input\\number-input-group.svelte"
+				},
+				{
+					"type": "registry:file",
+					"path": "src\\lib\\registry\\ui\\number-input\\number-input.svelte"
 				}
 			]
 		}
