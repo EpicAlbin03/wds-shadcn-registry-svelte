@@ -42,6 +42,21 @@
 			]
 		},
 		{
+			"name": "multi-select",
+			"type": "registry:ui",
+			"registryDependencies": ["utils", "badge", "command", "popover"],
+			"files": [
+				{
+					"type": "registry:file",
+					"path": "src\\lib\\registry\\ui\\multi-select\\index.ts"
+				},
+				{
+					"type": "registry:file",
+					"path": "src\\lib\\registry\\ui\\multi-select\\multi-select.svelte"
+				}
+			]
+		},
+		{
 			"name": "number-input",
 			"type": "registry:ui",
 			"registryDependencies": ["utils", "input"],

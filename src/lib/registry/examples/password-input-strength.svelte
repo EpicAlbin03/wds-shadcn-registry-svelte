@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { PasswordInput } from '$lib/registry/ui/password-input';
+
+	let value = $state('');
 </script>
 
-<PasswordInput variant="strength" />
+<PasswordInput bind:value variant="strength" />

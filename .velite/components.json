@@ -81,6 +81,52 @@
     "slugFull": "/components/loading-swap"
   },
   {
+    "title": "Multi-Select",
+    "description": "A multi-select input that emulates the Shadcn Select component as closely as possible.",
+    "path": "components/multi-select",
+    "component": true,
+    "toc": [
+      {
+        "title": "Installation",
+        "url": "#installation",
+        "items": []
+      },
+      {
+        "title": "Usage",
+        "url": "#usage",
+        "items": []
+      },
+      {
+        "title": "Examples",
+        "url": "#examples",
+        "items": [
+          {
+            "title": "Customize Badges",
+            "url": "#customize-badges",
+            "items": []
+          },
+          {
+            "title": "Overflow Behavior",
+            "url": "#overflow-behavior",
+            "items": []
+          },
+          {
+            "title": "Search Configuration",
+            "url": "#search-configuration",
+            "items": []
+          },
+          {
+            "title": "Form",
+            "url": "#form",
+            "items": []
+          }
+        ]
+      }
+    ],
+    "slug": "multi-select",
+    "slugFull": "/components/multi-select"
+  },
+  {
     "title": "Number Input",
     "description": "An input that returns a number value and automatically handles invalid inputs.",
     "path": "components/number-input",

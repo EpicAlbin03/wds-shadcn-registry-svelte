@@ -60,6 +60,7 @@ function componentPreviews() {
 
 			const importIndex = content.search('import ComponentPreview');
 			for (const name of components) {
+				if (!name || name.endsWith('-')) continue;
 				const identifier = camelize(name);
 				let importStatement = '';
 				if (name.startsWith('chart') && !name.includes('demo')) {

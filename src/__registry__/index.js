@@ -20,6 +20,21 @@ export const Index = {
 "loading-swap-large": {
 	files: ["src/lib/registry/examples/loading-swap-large.svelte"],
 },
+"multi-select-custom-badges": {
+	files: ["src/lib/registry/examples/multi-select-custom-badges.svelte"],
+},
+"multi-select-demo": {
+	files: ["src/lib/registry/examples/multi-select-demo.svelte"],
+},
+"multi-select-form": {
+	files: ["src/lib/registry/examples/multi-select-form.svelte"],
+},
+"multi-select-overflow": {
+	files: ["src/lib/registry/examples/multi-select-overflow.svelte"],
+},
+"multi-select-search": {
+	files: ["src/lib/registry/examples/multi-select-search.svelte"],
+},
 "number-input-demo": {
 	files: ["src/lib/registry/examples/number-input-demo.svelte"],
 },
