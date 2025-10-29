@@ -2,6 +2,7 @@
 	{
 		"name": "action-button",
 		"type": "registry:ui",
+		"description": "A button that performs an action when clicked and optionally asks for user confirmation.",
 		"registryDependencies": [
 			"button",
 			"loading-swap",
@@ -12,6 +13,7 @@
 	{
 		"name": "loading-swap",
 		"type": "registry:ui",
+		"description": "Swaps child content with a loading spinner without changing the element size.",
 		"registryDependencies": [
 			"utils"
 		],
@@ -20,6 +22,7 @@
 	{
 		"name": "multi-select",
 		"type": "registry:ui",
+		"description": "A multi-select input that emulates the Shadcn Select component as closely as possible.",
 		"registryDependencies": [
 			"utils",
 			"badge",
@@ -31,6 +34,7 @@
 	{
 		"name": "number-input",
 		"type": "registry:ui",
+		"description": "An input that returns a number value and automatically handles invalid inputs.",
 		"registryDependencies": [
 			"utils",
 			"input"
@@ -40,6 +44,7 @@
 	{
 		"name": "password-input",
 		"type": "registry:ui",
+		"description": "An input that can toggle visibility of the password text and check the strength of the password.",
 		"registryDependencies": [
 			"utils",
 			"tooltip",

@@ -2,6 +2,7 @@
 	"$schema": "https://shadcn-svelte.com/schema/registry-item.json",
 	"name": "action-button",
 	"type": "registry:ui",
+	"description": "A button that performs an action when clicked and optionally asks for user confirmation.",
 	"devDependencies": [
 		"svelte-sonner@^1.0.5"
 	],
