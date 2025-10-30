@@ -1,38 +1,32 @@
-# sv
+<p align="center">
+ <img align="center" src="./static/android-chrome-192x192.png" height="96" />
+ <h1 align="center">
+  wds-shadcn-registry-svelte
+ </h1>
+</p>
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+[wds-shadcn-registry-svelte](https://localhost:5173) is an unofficial community-led [Svelte](https://svelte.dev) port of [wds-shadcn-registry](https://wds-shadcn-registry.netlify.app).
 
-## Creating a project
+> **Note** <br> **This project is not affiliated with wds-shadcn-registry** <br>
 
-If you're seeing this, you've probably already done this step. Congrats!
+![hero](./static/opengraph.png)
 
-```sh
-# create a new project in the current directory
-npx sv create
+[wds-shadcn-registry-svelte](https://localhost:5173) is an open-source collection of copy-and-paste shadcn components.
 
-# create a new project in my-app
-npx sv create my-app
-```
+## Documentation
 
-## Developing
+Visit https://localhost:5173 to view the documentation.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Credits
 
-```sh
-npm run dev
+We are grateful for the contributions of the open-source community, particularly:
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+- [wds-shadcn-registry](https://wds-shadcn-registry.netlify.app)
+- [shadcn-svelte](https://shadcn-svelte.com)
+- [bits-ui](https://bits-ui.com)
 
-## Building
+These projects form the backbone of wds-shadcn-registry-svelte, allowing us to build a powerful copy-and-paste components.
 
-To create a production version of your app:
+## License
 
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Licensed under the [MIT license](https://github.com/EpicAlbin03/wds-shadcn-registry-svelte/blob/main/LICENSE.md).
