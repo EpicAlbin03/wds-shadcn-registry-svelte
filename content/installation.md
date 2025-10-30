@@ -4,7 +4,7 @@ description: How to install WDS Shadcn components in your project.
 ---
 
 <script>
-	import PMExecute from "$lib/components/pm-execute.svelte";
+	import PMAddComp from "$lib/components/pm-add-comp.svelte";
 </script>
 
 It doesn't matter what framework or package manager you are using. Installing WDS Shadcn components is as simple as running the `pnpm dlx shadcn-svelte@latest add http://localhost:5173/registry/<component>.json` command and replacing `<component>` with the name of the component you want to install.
@@ -13,4 +13,4 @@ The entire install process is handled by the `shadcn-svelte` CLI tool and works 
 
 ### Example
 
-<PMExecute command="shadcn-svelte@latest add http://localhost:5173/registry/action-button.json" />
+<PMAddComp name="action-button" />

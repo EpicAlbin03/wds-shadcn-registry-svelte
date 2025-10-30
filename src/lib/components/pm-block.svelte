@@ -67,7 +67,7 @@
 						{#snippet child({ props })}
 							{@const { hidden, class: className, ...rest } = props}
 							<div {...rest} class={cn(className as string, (hidden as boolean) && 'hidden')}>
-								<pre><code class="font-mono text-sm leading-none" data-language="bash"
+								<pre><code class="font-mono text-sm leading-none text-wrap" data-language="bash"
 										>{getCommandText(pm)}</code
 									></pre>
 							</div>
