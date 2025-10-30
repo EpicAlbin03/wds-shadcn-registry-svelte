@@ -10,7 +10,7 @@ import { JSDOM } from 'jsdom';
 import consola from 'consola';
 import type { Plugin } from 'unified';
 import type { Root, Link, Node, Paragraph, Text } from 'mdast';
-import { components, installation } from '../.velite';
+import { components, gettingStarted } from '../.velite';
 
 consola.wrapConsole();
 
@@ -25,7 +25,7 @@ const remarkRelativeLinks: Plugin<[], Root> = () => {
 			if (node.type === 'link' && 'url' in node) {
 				const link = node as Link;
 				if (link.url.startsWith('/')) {
-					link.url = `https://shadcn-svelte.com${link.url}`;
+					link.url = `https://local${link.url}`;
 				}
 			}
 
@@ -95,22 +95,6 @@ type LinkData = {
 	path: string;
 	description?: string;
 	title?: string;
-};
-
-type VeliteData = (typeof components)[number] | (typeof installation)[number];
-
-type CategorizedLinks = {
-	overview: LinkData[];
-	installation: LinkData[];
-	components: {
-		formInput: LinkData[];
-		layoutNavigation: LinkData[];
-		overlaysDialogs: LinkData[];
-		feedbackStatus: LinkData[];
-		displayMedia: LinkData[];
-		misc: LinkData[];
-	};
-	other: LinkData[];
 };
 
 const REGEX_PATTERNS = {
@@ -191,221 +175,39 @@ async function toMarkdown(rawHtml: string) {
 	return sanitizedFile;
 }
 
-function findVeliteData(veliteData: Record<string, VeliteData[]>, path: string): VeliteData | null {
-	// search through all velite data arrays for matching path
-	for (const dataArray of Object.values(veliteData)) {
-		const found = dataArray.find((item) => item.path === path);
-		if (found) return found;
-	}
-	return null;
-}
+async function createLLMsIndex(_files: FileMap) {
+	const overviewLinks: LinkData[] = gettingStarted
+		.map((item) => ({
+			name: basename(item.path),
+			path: `https://localhost:5173/${item.path}.md`,
+			title: item.title,
+			description: item.description
+		}))
+		.sort((a, b) => (a.title || a.name).localeCompare(b.title || b.name));
 
-async function createLLMsIndex(files: FileMap) {
-	const veliteData = {
-		components,
-		installation
-	};
-	const categorizedLinks: CategorizedLinks = {
-		overview: [],
-		installation: [],
-		components: {
-			formInput: [],
-			layoutNavigation: [],
-			overlaysDialogs: [],
-			feedbackStatus: [],
-			displayMedia: [],
-			misc: []
-		},
-		other: []
-	};
+	const componentLinks: LinkData[] = components
+		.map((item) => ({
+			name: basename(item.path),
+			path: `https://local/${item.path}.md`,
+			title: item.title,
+			description: item.description
+		}))
+		.sort((a, b) => (a.title || a.name).localeCompare(b.title || b.name));
 
-	const componentCategories = {
-		formInput: [
-			'form',
-			'field',
-			'button',
-			'button-group',
-			'input',
-			'input-group',
-			'input-otp',
-			'textarea',
-			'checkbox',
-			'radio-group',
-			'select',
-			'switch',
-			'slider',
-			'calendar',
-			'date-picker',
-			'combobox',
-			'label',
-			'native-select'
-		],
-		layoutNavigation: [
-			'accordion',
-			'breadcrumb',
-			'navigation-menu',
-			'sidebar',
-			'tabs',
-			'separator',
-			'scroll-area',
-			'resizable'
-		],
-		overlaysDialogs: [
-			'dialog',
-			'alert-dialog',
-			'sheet',
-			'drawer',
-			'popover',
-			'tooltip',
-			'hover-card',
-			'context-menu',
-			'dropdown-menu',
-			'menubar',
-			'command'
-		],
-		feedbackStatus: ['alert', 'sonner', 'progress', 'spinner', 'skeleton', 'badge', 'empty'],
-		displayMedia: [
-			'avatar',
-			'card',
-			'table',
-			'data-table',
-			'chart',
-			'carousel',
-			'aspect-ratio',
-			'typography',
-			'item',
-			'kbd'
-		],
-		misc: ['collapsible', 'toggle', 'toggle-group', 'pagination']
-	};
+	const llmsContent = `# wds-shadcn-registry-svelte
 
-	for (const fileName of Object.keys(files)) {
-		if (!fileName.endsWith('.html')) continue;
-
-		const baseName = basename(fileName, '.html');
-		const dirPath = dirname(fileName);
-		const outputName =
-			baseName === 'index' ? (dirPath === '.' ? 'docs' : basename(dirPath)) : baseName;
-		const relativePath =
-			baseName === 'index' ? `${outputName}.md` : join(dirPath, `${outputName}.md`);
-
-		const veliteItem =
-			findVeliteData(veliteData, baseName) ||
-			findVeliteData(veliteData, join(dirPath, baseName).replace(/\\/g, '/')) ||
-			findVeliteData(veliteData, dirPath.replace(/\\/g, '/') + '/' + baseName);
-
-		const linkData: LinkData = {
-			name: outputName,
-			path: `https://shadcn-svelte.com/docs/${relativePath}`,
-			title: veliteItem?.title,
-			description: veliteItem?.description
-		};
-
-		if (
-			outputName === 'index' ||
-			outputName === 'about' ||
-			outputName === 'changelog' ||
-			outputName === 'cli' ||
-			outputName === 'components-json' ||
-			outputName === 'theming' ||
-			outputName === 'javascript' ||
-			outputName === 'legacy'
-		) {
-			categorizedLinks.overview.push(linkData);
-		} else if (dirPath.includes('installation')) {
-			categorizedLinks.installation.push(linkData);
-		} else if (dirPath.includes('components')) {
-			let categorized = false;
-			if (componentCategories.formInput.includes(outputName)) {
-				categorizedLinks.components.formInput.push(linkData);
-				categorized = true;
-			} else if (componentCategories.layoutNavigation.includes(outputName)) {
-				categorizedLinks.components.layoutNavigation.push(linkData);
-				categorized = true;
-			} else if (componentCategories.overlaysDialogs.includes(outputName)) {
-				categorizedLinks.components.overlaysDialogs.push(linkData);
-				categorized = true;
-			} else if (componentCategories.feedbackStatus.includes(outputName)) {
-				categorizedLinks.components.feedbackStatus.push(linkData);
-				categorized = true;
-			} else if (componentCategories.displayMedia.includes(outputName)) {
-				categorizedLinks.components.displayMedia.push(linkData);
-				categorized = true;
-			} else if (componentCategories.misc.includes(outputName)) {
-				categorizedLinks.components.misc.push(linkData);
-				categorized = true;
-			}
-
-			if (!categorized) {
-				categorizedLinks.components.misc.push(linkData);
-			}
-		} else {
-			categorizedLinks.other.push(linkData);
-		}
-	}
-
-	categorizedLinks.overview.sort((a, b) => a.name.localeCompare(b.name));
-	categorizedLinks.installation.sort((a, b) => a.name.localeCompare(b.name));
-	categorizedLinks.other.sort((a, b) => a.name.localeCompare(b.name));
-
-	categorizedLinks.components.formInput.sort((a, b) => a.name.localeCompare(b.name));
-	categorizedLinks.components.layoutNavigation.sort((a, b) => a.name.localeCompare(b.name));
-	categorizedLinks.components.overlaysDialogs.sort((a, b) => a.name.localeCompare(b.name));
-	categorizedLinks.components.feedbackStatus.sort((a, b) => a.name.localeCompare(b.name));
-	categorizedLinks.components.displayMedia.sort((a, b) => a.name.localeCompare(b.name));
-	categorizedLinks.components.misc.sort((a, b) => a.name.localeCompare(b.name));
-
-	const llmsContent = `# shadcn-svelte
-
-> shadcn-svelte is a collection of beautifully-designed, accessible components for Svelte and SvelteKit. It is built with TypeScript, Tailwind CSS, and Bits UI primitives. Open Source. Open Code. AI-Ready. It also comes with a command-line tool to install and manage components and a registry system to publish and distribute code.
+> wds-shadcn-registry-svelte is a collection of beautifully-designed, accessible components for Svelte and SvelteKit. It is built with shadcn-svelte, TypeScript, Tailwind CSS, and Bits UI primitives.
 
 ## Overview
 
-${categorizedLinks.overview
-	.map((link) => `- [${link.title || formatName(link.name)}](${link.path}): ${link.description}`)
-	.join('\n')}
-
-## Installation
-
-${categorizedLinks.installation
+${overviewLinks
+	.reverse()
 	.map((link) => `- [${link.title || formatName(link.name)}](${link.path}): ${link.description}`)
 	.join('\n')}
 
 ## Components
 
-### Form & Input
-
-${categorizedLinks.components.formInput
-	.map((link) => `- [${link.title || formatName(link.name)}](${link.path}): ${link.description}`)
-	.join('\n')}
-
-### Layout & Navigation
-
-${categorizedLinks.components.layoutNavigation
-	.map((link) => `- [${link.title || formatName(link.name)}](${link.path}): ${link.description}`)
-	.join('\n')}
-
-### Overlays & Dialogs
-
-${categorizedLinks.components.overlaysDialogs
-	.map((link) => `- [${link.title || formatName(link.name)}](${link.path}): ${link.description}`)
-	.join('\n')}
-
-### Feedback & Status
-
-${categorizedLinks.components.feedbackStatus
-	.map((link) => `- [${link.title || formatName(link.name)}](${link.path}): ${link.description}`)
-	.join('\n')}
-
-### Display & Media
-
-${categorizedLinks.components.displayMedia
-	.map((link) => `- [${link.title || formatName(link.name)}](${link.path}): ${link.description}`)
-	.join('\n')}
-
-### Misc
-
-${categorizedLinks.components.misc
+${componentLinks
 	.map((link) => `- [${link.title || formatName(link.name)}](${link.path}): ${link.description}`)
 	.join('\n')}
 `;
@@ -417,7 +219,7 @@ ${categorizedLinks.components.misc
 		await writeFile(outputPath, llmsContent);
 	};
 
-	await createFile('../.svelte-kit/cloudflare/llms.txt');
+	await createFile('../build/llms.txt');
 
 	consola.info('Created llms.txt index file!');
 }
@@ -432,7 +234,7 @@ function formatName(name: string): string {
 async function main() {
 	try {
 		consola.info('Starting to build LLM files...');
-		const rootPath = join(__dirname, '../.svelte-kit/cloudflare/docs');
+		const rootPath = join(__dirname, '../build');
 		console.info('Collecting files from', rootPath);
 		const files = await collectFiles(rootPath, rootPath);
 		const fileNames = Object.keys(files).filter((fileName) => fileName.endsWith('.html'));
@@ -448,12 +250,12 @@ async function main() {
 			const baseName = basename(fileName, '.html');
 			const dirPath = dirname(fileName);
 			const outputName =
-				baseName === 'index' ? (dirPath === '.' ? 'docs' : basename(dirPath)) : baseName;
+				baseName === 'index' ? (dirPath === '.' ? '' : basename(dirPath)) : baseName;
 
 			const createFile = async (destinationDir: string) => {
 				const outputPath =
 					baseName === 'index' && dirPath === '.'
-						? join(__dirname, destinationDir.replace('/docs', ''), `${outputName}.md`)
+						? join(__dirname, destinationDir.replace('/', ''), `${outputName}.md`)
 						: baseName === 'index'
 							? join(__dirname, destinationDir, `${outputName}.md`)
 							: join(__dirname, destinationDir, dirPath, `${outputName}.md`);
@@ -462,7 +264,7 @@ async function main() {
 				await writeFile(outputPath, cleanedContent);
 			};
 
-			await createFile('../.svelte-kit/cloudflare/docs');
+			await createFile('../build');
 		}
 
 		await createLLMsIndex(files);

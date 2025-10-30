@@ -8,6 +8,13 @@ node_modules
 /.svelte-kit
 /build
 
+/static/registry
+/static/schema/registry.json
+/static/schema/registry-item.json
+/static/**/*.md
+/static/llms.txt
+/src/__registry__
+
 # OS
 .DS_Store
 Thumbs.db
