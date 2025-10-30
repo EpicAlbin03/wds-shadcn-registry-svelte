@@ -6,9 +6,15 @@
     "component": false,
     "toc": [
       {
-        "title": "Changelog",
-        "url": "#changelog",
-        "items": []
+        "title": "November 2025",
+        "url": "#november-2025",
+        "items": [
+          {
+            "title": "Initial Component Release",
+            "url": "#initial-component-release",
+            "items": []
+          }
+        ]
       }
     ],
     "slug": "",
