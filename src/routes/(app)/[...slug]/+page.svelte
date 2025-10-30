@@ -22,14 +22,7 @@
 	const neighbors = $derived(findNeighbors(page.url.pathname));
 </script>
 
-<Metadata
-	title={doc.title}
-	description={doc.description}
-	ogImage={{
-		url: `/og?title=${encodeURIComponent(doc.title)}&description=${encodeURIComponent(doc.description)}`
-	}}
-	ogType="article"
-/>
+<Metadata title={doc.title} description={doc.description} ogType="article" />
 
 <!--
 NOTE: The TOC needs to come first in the DOM order to prevent CLS, so we flex-row-reverse

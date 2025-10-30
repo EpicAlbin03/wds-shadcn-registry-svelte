@@ -14,7 +14,7 @@
 		"build:llms": "tsx scripts/build-llms.ts",
 		"build:llm-placeholders": "tsx scripts/build-llm-placeholders.ts",
 		"replace:velite": "tsx scripts/velite/velite-watch-output.ts",
-		"sync": "pnpm build:registry && pnpm build:content && svelte-kit sync",
+		"sync": "pnpm build:content && pnpm build:registry && svelte-kit sync",
 		"preview": "vite preview",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch"

@@ -3,7 +3,6 @@ import { z } from 'zod/v4';
 import { json } from '@sveltejs/kit';
 import { registryItemFileSchema, registryItemSchema } from '@shadcn-svelte/registry';
 import { highlightCode } from '$lib/highlight-code.js';
-import { blockMeta } from '$lib/registry/registry-block-meta';
 import { transformBlockPath, transformImportPaths } from '$lib/registry/registry-utils';
 import type { RequestHandler } from './$types.js';
 
@@ -22,7 +21,7 @@ const highlightedBlockSchema = registryItemSchema
 async function loadItem(block: string): Promise<HighlightedBlock> {
 	const { default: mod } = await import(`../../../../__registry__/json/${block}.json`);
 	const item = registryItemSchema.parse(mod);
-	const meta = blockMeta[item.name as keyof typeof blockMeta];
+	// const meta = blockMeta[item.name as keyof typeof blockMeta];
 	const files = item.files.map(async (file) => {
 		const lang = path.extname(file.target).slice(1);
 
@@ -39,9 +38,9 @@ async function loadItem(block: string): Promise<HighlightedBlock> {
 
 	return highlightedBlockSchema.parse({
 		...item,
-		files: await Promise.all(files),
-		description: meta?.description,
-		meta
+		files: await Promise.all(files)
+		// description: meta?.description,
+		// meta
 	});
 }
 

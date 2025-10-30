@@ -2,7 +2,7 @@ export const siteConfig = {
 	name: 'wds-shadcn-registry-svelte',
 	url: 'https://localhost:5173',
 	ogImage: {
-		url: 'https://localhost:5173/opengraph-image.png',
+		url: 'https://localhost:5173/opengraph.png',
 		width: '1200',
 		height: '630'
 	},
