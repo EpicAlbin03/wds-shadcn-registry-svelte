@@ -40,7 +40,32 @@ Copy and paste the component source files linked at the top of this page into yo
 ## Usage
 
 ```svelte
+<script lang="ts">
+	import { MultiSelect } from '$lib/components/ui/multi-select';
 
+	const frameworks = [
+		{ value: 'next.js', label: 'Next.js' },
+		{ value: 'sveltekit', label: 'SvelteKit' },
+		{ value: 'nuxt.js', label: 'Nuxt.js' },
+		{ value: 'remix', label: 'Remix' },
+		{ value: 'astro', label: 'Astro' },
+		{ value: 'vue', label: 'Vue.js' },
+		{ value: 'react', label: 'React' }
+	];
+
+	let value = $state<string[]>([]);
+</script>
+
+<MultiSelect
+	bind:value
+	items={frameworks}
+	placeholder="Select frameworks..."
+	placeholderSearch="Search frameworks..."
+	emptySearchMessage="No frameworks found"
+	overflowBehavior="wrap-when-open"
+	disableSearch
+	class="w-[400px]"
+/>
 ```
 
 ## Examples
