@@ -1,4 +1,4 @@
-import type { RegistryItemFile } from "@shadcn-svelte/registry";
+import type { RegistryItemFile } from '@shadcn-svelte/registry';
 
 export type FileTree = {
 	name: string;
@@ -6,32 +6,28 @@ export type FileTree = {
 	children?: FileTree[];
 };
 
-export function transformBlockPath(target: string, type: RegistryItemFile["type"]): string {
-	const parts = target.split("/");
+export function transformUIPath(target: string): string {
+	return `ui/${target}`;
+}
 
-	if (type === "registry:page" || type === "registry:file") {
-		return `routes/${target}`;
-	}
-
-	if (type === "registry:component" || type === "registry:hook") {
-		const dir = type === "registry:component" ? "components" : "hooks";
-		const idx = parts.indexOf(dir);
-
-		const remainingPath = parts.slice(idx + 1).join("/");
-		return `${dir}/${remainingPath}`;
-	}
-
-	return target;
+export function transformComponentPath(target: string): string {
+	return `components/${target}`;
 }
 
 export function createFileTreeForRegistryItemFiles(
-	files: Array<{ target: string; type: RegistryItemFile["type"] }>
+	files: Array<{ target: string; type: RegistryItemFile['type'] }>
 ): FileTree[] {
 	const root: FileTree[] = [];
+	const GROUP_PREFIXES = new Set(['ui', 'components', 'hooks']);
 
 	for (const file of files) {
 		const path = file.target;
-		const parts = path.split("/");
+		let parts = path.split('/');
+
+		if (parts.length >= 2 && GROUP_PREFIXES.has(parts[0])) {
+			const [prefix, second, ...rest] = parts;
+			parts = [`${prefix}/${second}`, ...rest];
+		}
 		let currentLevel = root;
 
 		for (let i = 0; i < parts.length; i++) {
@@ -46,9 +42,7 @@ export function createFileTreeForRegistryItemFiles(
 					currentLevel = existingNode.children!;
 				}
 			} else {
-				const newNode: FileTree = isFile
-					? { name: part, path }
-					: { name: part, children: [] };
+				const newNode: FileTree = isFile ? { name: part, path } : { name: part, children: [] };
 
 				currentLevel.push(newNode);
 
@@ -64,11 +58,11 @@ export function createFileTreeForRegistryItemFiles(
 
 export function transformImportPaths(content: string): string {
 	const aliases = {
-		ui: "$lib/components/ui",
-		utils: "$lib/utils",
-		components: "$lib/components",
-		hooks: "$lib/hooks",
-		lib: "$lib",
+		ui: '$lib/components/ui',
+		utils: '$lib/utils',
+		components: '$lib/components',
+		hooks: '$lib/hooks',
+		lib: '$lib'
 	};
 	for (const [alias, path] of Object.entries(aliases)) {
 		content = content.replaceAll(`$${alias.toUpperCase()}$`, path);
