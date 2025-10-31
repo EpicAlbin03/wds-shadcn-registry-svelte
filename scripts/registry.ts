@@ -7,7 +7,9 @@ import * as svelte from 'svelte/compiler';
 import { registryItemSchema, type Registry } from '@shadcn-svelte/registry';
 
 const REGISTRY_DEPENDENCY = '$lib/';
-const UTILS_PATH = '$lib/utils.js';
+const UTILS_PATH = '$lib/utils';
+const PACKAGE_DEPENDENCIES = ['@lucide/svelte', 'bits-ui', '@zxcvbn-ts/core', 'runed'];
+const DYNAMIC_IMPORTS = ['@zxcvbn-ts/language-common', '@zxcvbn-ts/language-en'];
 
 const tsParser = acorn.Parser.extend(tsPlugin());
 
@@ -95,6 +97,7 @@ async function buildUIRegistry(
 
 	const files: RegistryItemFiles = [];
 	const registryDependencies = new Set<string>();
+	const packageDependencies = new Set<string>();
 
 	let meta = {};
 
@@ -115,6 +118,7 @@ async function buildUIRegistry(
 		if (!deps) continue;
 
 		deps.registryDependencies.forEach((dep) => registryDependencies.add(dep));
+		deps.packageDependencies.forEach((dep) => packageDependencies.add(dep));
 	}
 
 	return {
@@ -122,7 +126,8 @@ async function buildUIRegistry(
 		type: 'registry:ui',
 		files,
 		name: componentName,
-		registryDependencies: Array.from(registryDependencies)
+		registryDependencies: Array.from(registryDependencies),
+		dependencies: Array.from(packageDependencies)
 	} satisfies RegistryItems[number];
 }
 
@@ -139,13 +144,17 @@ async function crawlExamples(rootPath: string): Promise<RegistryItems> {
 		const source = fs.readFileSync(filepath, { encoding: 'utf8' });
 		const relativePath = path.relative(process.cwd(), filepath);
 
-		const { registryDependencies } = await getFileDependencies(filepath, source);
+		const { registryDependencies, packageDependencies } = await getFileDependencies(
+			filepath,
+			source
+		);
 
 		items.push({
 			name,
 			type: 'registry:example',
 			files: [{ path: relativePath, type: 'registry:component' }],
-			registryDependencies: Array.from(registryDependencies)
+			registryDependencies: Array.from(registryDependencies),
+			dependencies: Array.from(packageDependencies)
 		});
 	}
 
@@ -159,6 +168,7 @@ async function buildBlockRegistry(
 	const dir = fs.readdirSync(blockPath, { withFileTypes: true, recursive: true });
 	const files: RegistryItemFiles = [];
 	const registryDependencies = new Set<string>();
+	const packageDependencies = new Set<string>();
 
 	const pagesNames = ['+page.svelte'];
 	const fileNames = ['data.json', 'data.ts'];
@@ -182,13 +192,15 @@ async function buildBlockRegistry(
 		if (!deps) continue;
 
 		deps.registryDependencies.forEach((dep) => registryDependencies.add(dep));
+		deps.packageDependencies.forEach((dep) => packageDependencies.add(dep));
 	}
 
 	return {
 		type: 'registry:block',
 		files,
 		name: blockName,
-		registryDependencies: Array.from(registryDependencies)
+		registryDependencies: Array.from(registryDependencies),
+		dependencies: Array.from(packageDependencies)
 	} satisfies RegistryItems[number];
 }
 
@@ -210,13 +222,17 @@ async function crawlBlocks(rootPath: string): Promise<RegistryItems> {
 		const source = fs.readFileSync(filepath, { encoding: 'utf8' });
 		const relativePath = path.relative(process.cwd(), filepath);
 
-		const { registryDependencies } = await getFileDependencies(filepath, source);
+		const { registryDependencies, packageDependencies } = await getFileDependencies(
+			filepath,
+			source
+		);
 
 		items.push({
 			name,
 			type: 'registry:block',
 			files: [{ path: relativePath, type: 'registry:component' }],
-			registryDependencies: Array.from(registryDependencies)
+			registryDependencies: Array.from(registryDependencies),
+			dependencies: Array.from(packageDependencies)
 		});
 	}
 
@@ -236,13 +252,17 @@ async function crawlComponents(rootPath: string): Promise<RegistryItems> {
 		const source = fs.readFileSync(filepath, { encoding: 'utf8' });
 		const relativePath = path.relative(process.cwd(), filepath);
 
-		const { registryDependencies } = await getFileDependencies(filepath, source);
+		const { registryDependencies, packageDependencies } = await getFileDependencies(
+			filepath,
+			source
+		);
 
 		items.push({
 			name,
 			type: 'registry:component',
 			files: [{ path: relativePath, type: 'registry:component' }],
-			registryDependencies: Array.from(registryDependencies)
+			registryDependencies: Array.from(registryDependencies),
+			dependencies: Array.from(packageDependencies)
 		});
 	}
 
@@ -261,13 +281,17 @@ async function crawlLib(rootPath: string): Promise<RegistryItems> {
 		const source = fs.readFileSync(filepath, { encoding: 'utf8' });
 		const relativePath = path.relative(process.cwd(), filepath);
 
-		const { registryDependencies } = await getFileDependencies(filepath, source);
+		const { registryDependencies, packageDependencies } = await getFileDependencies(
+			filepath,
+			source
+		);
 
 		items.push({
 			name,
 			type: 'registry:lib',
 			files: [{ path: relativePath, type: 'registry:lib' }],
-			registryDependencies: Array.from(registryDependencies)
+			registryDependencies: Array.from(registryDependencies),
+			dependencies: Array.from(packageDependencies)
 		});
 	}
 
@@ -287,13 +311,17 @@ async function crawlHooks(rootPath: string): Promise<RegistryItems> {
 		const source = fs.readFileSync(filepath, { encoding: 'utf8' });
 		const relativePath = path.relative(process.cwd(), filepath);
 
-		const { registryDependencies } = await getFileDependencies(filepath, source);
+		const { registryDependencies, packageDependencies } = await getFileDependencies(
+			filepath,
+			source
+		);
 
 		items.push({
 			name,
 			type: 'registry:hook',
 			files: [{ path: relativePath, type: 'registry:hook' }],
-			registryDependencies: Array.from(registryDependencies)
+			registryDependencies: Array.from(registryDependencies),
+			dependencies: Array.from(packageDependencies)
 		});
 	}
 
@@ -303,7 +331,7 @@ async function crawlHooks(rootPath: string): Promise<RegistryItems> {
 async function getFileDependencies(
 	filename: string,
 	content: string
-): Promise<{ registryDependencies: Set<string> }> {
+): Promise<{ registryDependencies: Set<string>; packageDependencies: Set<string> }> {
 	let ast: unknown;
 	let moduleAst: unknown;
 
@@ -319,6 +347,7 @@ async function getFileDependencies(
 	}
 
 	const registryDependencies = new Set<string>();
+	const packageDependencies = new Set<string>();
 
 	const enter = (node: Node) => {
 		if (node.type === 'ImportDeclaration') {
@@ -331,10 +360,26 @@ async function getFileDependencies(
 				} else if (source.includes('hook')) {
 					const hook = source.split('/').at(-1)!.split('.')[0];
 					registryDependencies.add(hook);
-				} else if (source.includes('$lib/utils')) {
-					registryDependencies.add('utils');
 				}
 			}
+
+			if (source.includes(UTILS_PATH)) {
+				registryDependencies.add('utils');
+			}
+
+			PACKAGE_DEPENDENCIES.forEach((dep) => {
+				if (source === dep) {
+					packageDependencies.add(dep);
+				}
+			});
+		} else if (node.type === 'ImportExpression' && node.source.type === 'Literal') {
+			const source = node.source.value as string;
+
+			DYNAMIC_IMPORTS.forEach((dep) => {
+				if (source === dep) {
+					packageDependencies.add(dep);
+				}
+			});
 		}
 	};
 
@@ -346,5 +391,5 @@ async function getFileDependencies(
 		walk(moduleAst, { enter });
 	}
 
-	return { registryDependencies };
+	return { registryDependencies, packageDependencies };
 }

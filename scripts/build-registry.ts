@@ -54,8 +54,6 @@ export async function build(): Promise<void> {
 				hooks: '$lib/registry/hooks',
 				utils: '$lib/utils'
 			},
-			// TODO: remove when moving from `next` to `latest`
-			overrideDependencies: ['vaul-svelte@next'],
 			items: [...registry]
 		} as Registry,
 		// maintains the schema defined property order

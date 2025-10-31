@@ -25,7 +25,7 @@ const remarkRelativeLinks: Plugin<[], Root> = () => {
 			if (node.type === 'link' && 'url' in node) {
 				const link = node as Link;
 				if (link.url.startsWith('/')) {
-					link.url = `https://local${link.url}`;
+					link.url = `https://localhost:5173${link.url}`;
 				}
 			}
 

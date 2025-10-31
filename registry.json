@@ -2,7 +2,6 @@
 	"$schema": "./static/schema/registry.json",
 	"name": "wds-shadcn-registry-svelte",
 	"homepage": "https://localhost:5173",
-	"overrideDependencies": ["vaul-svelte@next"],
 	"aliases": {
 		"lib": "$lib/registry/lib",
 		"ui": "$lib/registry/ui",
@@ -15,6 +14,7 @@
 			"name": "action-button",
 			"type": "registry:ui",
 			"description": "A button that performs an action when clicked and optionally asks for user confirmation.",
+			"dependencies": [],
 			"registryDependencies": ["button", "loading-swap", "alert-dialog"],
 			"files": [
 				{
@@ -31,6 +31,7 @@
 			"name": "loading-swap",
 			"type": "registry:ui",
 			"description": "Swaps child content with a loading spinner without changing the element size.",
+			"dependencies": ["@lucide/svelte"],
 			"registryDependencies": ["utils"],
 			"files": [
 				{
@@ -47,6 +48,7 @@
 			"name": "multi-select",
 			"type": "registry:ui",
 			"description": "A multi-select input that emulates the Shadcn Select component as closely as possible.",
+			"dependencies": ["@lucide/svelte", "bits-ui", "runed"],
 			"registryDependencies": ["utils", "badge", "command", "popover"],
 			"files": [
 				{
@@ -63,6 +65,7 @@
 			"name": "number-input",
 			"type": "registry:ui",
 			"description": "An input that returns a number value and automatically handles invalid inputs.",
+			"dependencies": [],
 			"registryDependencies": ["utils", "input"],
 			"files": [
 				{
@@ -83,6 +86,12 @@
 			"name": "password-input",
 			"type": "registry:ui",
 			"description": "An input that can toggle visibility of the password text and check the strength of the password.",
+			"dependencies": [
+				"@zxcvbn-ts/core",
+				"@zxcvbn-ts/language-common",
+				"@zxcvbn-ts/language-en",
+				"@lucide/svelte"
+			],
 			"registryDependencies": ["utils", "tooltip", "input-group"],
 			"files": [
 				{
