@@ -15,7 +15,7 @@
 			"type": "registry:ui",
 			"description": "Swaps child content with a loading spinner without changing the element size.",
 			"dependencies": ["@lucide/svelte"],
-			"registryDependencies": ["utils"],
+			"registryDependencies": [],
 			"files": [
 				{
 					"type": "registry:file",
@@ -32,7 +32,7 @@
 			"type": "registry:component",
 			"description": "A button that performs an action when clicked and optionally asks for user confirmation.",
 			"dependencies": [],
-			"registryDependencies": ["button", "loading-swap", "alert-dialog"],
+			"registryDependencies": ["button", "local:loading-swap", "alert-dialog"],
 			"files": [
 				{
 					"type": "registry:file",
@@ -49,7 +49,7 @@
 			"type": "registry:component",
 			"description": "A multi-select input that emulates the Shadcn Select component as closely as possible.",
 			"dependencies": ["@lucide/svelte", "bits-ui", "runed"],
-			"registryDependencies": ["utils", "badge", "command", "popover"],
+			"registryDependencies": ["badge", "command", "popover"],
 			"files": [
 				{
 					"type": "registry:file",
@@ -66,7 +66,7 @@
 			"type": "registry:component",
 			"description": "An input that returns a number value and automatically handles invalid inputs.",
 			"dependencies": [],
-			"registryDependencies": ["utils", "input"],
+			"registryDependencies": ["input"],
 			"files": [
 				{
 					"type": "registry:file",
@@ -92,7 +92,7 @@
 				"@zxcvbn-ts/language-en",
 				"@lucide/svelte"
 			],
-			"registryDependencies": ["utils", "tooltip", "input-group"],
+			"registryDependencies": ["tooltip", "input-group"],
 			"files": [
 				{
 					"type": "registry:file",

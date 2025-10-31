@@ -6,7 +6,7 @@ import { walk, type Node } from 'estree-walker';
 import * as svelte from 'svelte/compiler';
 import { registryItemSchema, type Registry } from '@shadcn-svelte/registry';
 
-const REGISTRY_DEPENDENCY = '$lib/';
+const REGISTRY_DEPENDENCY = '$lib/registry';
 const UTILS_PATH = '$lib/utils';
 const PACKAGE_DEPENDENCIES = ['@lucide/svelte', 'bits-ui', '@zxcvbn-ts/core', 'runed'];
 const DYNAMIC_IMPORTS = ['@zxcvbn-ts/language-common', '@zxcvbn-ts/language-en'];
@@ -400,7 +400,15 @@ async function getFileDependencies(
 		if (node.type === 'ImportDeclaration') {
 			const source = node.source.value as string;
 
-			if (source.startsWith(REGISTRY_DEPENDENCY) && source !== UTILS_PATH) {
+			if (source.startsWith(REGISTRY_DEPENDENCY)) {
+				if (source.includes('ui')) {
+					const component = source.split('/').at(-1)!;
+					registryDependencies.add(`local:${component}`);
+				} else if (source.includes('hook')) {
+					const hook = source.split('/').at(-1)!.split('.')[0];
+					registryDependencies.add(`local:${hook}`);
+				}
+			} else if (source.startsWith('$lib/')) {
 				if (source.includes('ui')) {
 					const component = source.split('/').at(-1)!;
 					registryDependencies.add(component);
@@ -408,9 +416,7 @@ async function getFileDependencies(
 					const hook = source.split('/').at(-1)!.split('.')[0];
 					registryDependencies.add(hook);
 				}
-			}
-
-			if (source.includes(UTILS_PATH)) {
+			} else if (source.includes(UTILS_PATH)) {
 				registryDependencies.add('utils');
 			}
 
