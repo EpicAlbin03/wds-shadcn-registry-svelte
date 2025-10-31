@@ -22,7 +22,6 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 export const veliteDirPath = path.join(__dirname, '.velite');
 export const staticDirPath = path.join(__dirname, 'src/registry/json');
 export const contentDirPath = path.join(__dirname, 'content');
-export const ogDirPath = path.join(__dirname, 'src/routes/og');
 
 export default defineConfig({
 	plugins: [
@@ -46,7 +45,7 @@ export default defineConfig({
 	],
 	server: {
 		fs: {
-			allow: [veliteDirPath, staticDirPath, contentDirPath, ogDirPath]
+			allow: [veliteDirPath, staticDirPath, contentDirPath]
 		}
 	},
 	build: {

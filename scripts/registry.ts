@@ -16,6 +16,17 @@ const tsParser = acorn.Parser.extend(tsPlugin());
 type RegistryItems = Registry['items'];
 type RegistryItemFiles = Registry['items'][number]['files'];
 
+async function crawlIfExists(
+	rootPath: string,
+	crawler: (rootPath: string) => Promise<RegistryItems>
+): Promise<RegistryItems> {
+	if (!fs.existsSync(rootPath)) {
+		return [];
+	}
+
+	return crawler(rootPath);
+}
+
 export async function buildRegistry(): Promise<RegistryItems> {
 	const registryRootPath = path.resolve('src', 'lib', 'registry');
 	const items: RegistryItems = [];
@@ -30,12 +41,12 @@ export async function buildRegistry(): Promise<RegistryItems> {
 	};
 
 	const resolvedItems = await Promise.all([
-		crawlUI(paths.ui),
-		crawlExamples(paths.examples),
-		crawlBlocks(paths.blocks),
-		crawlComponents(paths.components),
-		crawlHooks(paths.hooks),
-		crawlLib(paths.lib)
+		crawlIfExists(paths.ui, crawlUI),
+		crawlIfExists(paths.examples, crawlExamples),
+		crawlIfExists(paths.blocks, crawlBlocks),
+		crawlIfExists(paths.components, crawlComponents),
+		crawlIfExists(paths.hooks, crawlHooks),
+		crawlIfExists(paths.lib, crawlLib)
 	]);
 
 	resolvedItems.forEach((i) => items.push(...i));
