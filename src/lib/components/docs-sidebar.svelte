@@ -32,6 +32,7 @@
 									<Sidebar.MenuItem class="w-full">
 										<Sidebar.MenuButton
 											isActive={subItem.href === pathname}
+											data-sveltekit-reload={subItem.href?.endsWith('.txt') ? true : undefined}
 											class="relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48"
 										>
 											{#snippet child({ props })}
