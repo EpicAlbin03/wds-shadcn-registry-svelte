@@ -41,7 +41,7 @@ Copy and paste the component source files linked at the top of this page into yo
 
 ```svelte
 <script lang="ts">
-	import { NumberInput, NumberInputGroup } from '$lib/components/ui/number-input';
+	import { NumberInput, NumberInputGroup } from '$lib/components/number-input';
 	import * as InputGroup from '$lib/components/ui/input-group/index.js';
 
 	let value = $state<number | null>(null);

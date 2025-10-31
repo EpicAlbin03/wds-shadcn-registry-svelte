@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { NumberInput } from '$lib/registry/ui/number-input';
+	import { NumberInput } from '$lib/registry/components/number-input';
 
 	let value = $state<number | null>(null);
 </script>

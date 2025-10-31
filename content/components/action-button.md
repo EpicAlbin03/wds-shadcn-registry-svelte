@@ -41,7 +41,7 @@ Copy and paste the component source files linked at the top of this page into yo
 
 ```svelte
 <script lang="ts">
-	import { ActionButton } from '$lib/components/ui/action-button';
+	import { ActionButton } from '$lib/components/action-button';
 	import { updateSettings } from '$lib/actions/settings';
 
 	const settings = { name: 'Kyle' };

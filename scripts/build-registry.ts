@@ -50,7 +50,7 @@ export async function build(): Promise<void> {
 			aliases: {
 				lib: '$lib/registry/lib',
 				ui: '$lib/registry/ui',
-				components: './components',
+				components: '$lib/registry/components',
 				hooks: '$lib/registry/hooks',
 				utils: '$lib/utils'
 			},

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MultiSelect } from '$lib/registry/ui/multi-select';
+	import { MultiSelect } from '$lib/registry/components/multi-select';
 
 	const frameworks = [
 		{ value: 'next.js', label: 'Next.js' },

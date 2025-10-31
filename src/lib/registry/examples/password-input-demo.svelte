@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PasswordInput } from '$lib/registry/ui/password-input';
+	import { PasswordInput } from '$lib/registry/components/password-input';
 
 	let value = $state('Password');
 </script>

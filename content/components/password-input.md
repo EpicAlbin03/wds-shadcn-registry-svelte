@@ -41,7 +41,7 @@ Copy and paste the component source files linked at the top of this page into yo
 
 ```svelte
 <script lang="ts">
-	import { PasswordInput } from '$lib/registry/ui/password-input';
+	import { PasswordInput } from '$lib/components/password-input';
 </script>
 
 <PasswordInput />

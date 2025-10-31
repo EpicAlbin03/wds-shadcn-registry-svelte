@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ActionButton from '$lib/registry/ui/action-button/action-button.svelte';
+	import { ActionButton } from '$lib/registry/components/action-button';
 
 	const remoteFunc = async () => {
 		// Simulate a remote function

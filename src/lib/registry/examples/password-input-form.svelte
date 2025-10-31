@@ -11,7 +11,7 @@
 	import { zod4 } from 'sveltekit-superforms/adapters';
 	import * as Form from '$lib/components/ui/form/index.js';
 	import { toast } from 'svelte-sonner';
-	import { PasswordInput } from '$lib/registry/ui/password-input';
+	import { PasswordInput } from '$lib/registry/components/password-input';
 
 	const form = superForm(defaults(zod4(formSchema)), {
 		validators: zod4(formSchema),

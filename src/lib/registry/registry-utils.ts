@@ -18,16 +18,10 @@ export function createFileTreeForRegistryItemFiles(
 	files: Array<{ target: string; type: RegistryItemFile['type'] }>
 ): FileTree[] {
 	const root: FileTree[] = [];
-	const GROUP_PREFIXES = new Set(['ui', 'components', 'hooks']);
 
 	for (const file of files) {
 		const path = file.target;
-		let parts = path.split('/');
-
-		if (parts.length >= 2 && GROUP_PREFIXES.has(parts[0])) {
-			const [prefix, second, ...rest] = parts;
-			parts = [`${prefix}/${second}`, ...rest];
-		}
+		const parts = path.split('/');
 		let currentLevel = root;
 
 		for (let i = 0; i < parts.length; i++) {

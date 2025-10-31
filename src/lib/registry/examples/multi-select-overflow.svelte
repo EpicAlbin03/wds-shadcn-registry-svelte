@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Label } from '$lib/components/ui/label';
-	import { MultiSelect } from '$lib/registry/ui/multi-select';
+	import { MultiSelect } from '$lib/registry/components/multi-select';
 	import * as Select from '$lib/components/ui/select';
 
 	const frameworks = [

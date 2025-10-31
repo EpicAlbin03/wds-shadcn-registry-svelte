@@ -3,7 +3,11 @@ import { z } from 'zod/v4';
 import { json } from '@sveltejs/kit';
 import { registryItemFileSchema, registryItemSchema } from '@shadcn-svelte/registry';
 import { highlightCode } from '$lib/highlight-code.js';
-import { transformBlockPath, transformImportPaths } from '$lib/registry/registry-utils';
+import {
+	transformUIPath,
+	transformComponentPath,
+	transformImportPaths
+} from '$lib/registry/registry-utils';
 import type { RequestHandler } from './$types.js';
 
 export type HighlightedBlock = z.output<typeof highlightedBlockSchema>;
@@ -28,10 +32,10 @@ async function loadItem(block: string): Promise<HighlightedBlock> {
 		file.content = transformImportPaths(file.content);
 		const highlightedContent = await highlightCode(file.content, lang);
 		let target;
-		if (item.type === 'registry:ui') {
-			target = file.target;
+		if (item.type === 'registry:component') {
+			target = transformComponentPath(file.target);
 		} else {
-			target = transformBlockPath(file.target, file.type);
+			target = transformUIPath(file.target);
 		}
 		return { ...file, highlightedContent, target };
 	});

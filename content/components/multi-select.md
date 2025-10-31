@@ -41,7 +41,7 @@ Copy and paste the component source files linked at the top of this page into yo
 
 ```svelte
 <script lang="ts">
-	import { MultiSelect } from '$lib/components/ui/multi-select';
+	import { MultiSelect } from '$lib/components/multi-select';
 
 	const frameworks = [
 		{ value: 'next.js', label: 'Next.js' },

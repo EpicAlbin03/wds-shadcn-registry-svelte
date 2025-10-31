@@ -44,7 +44,7 @@
 					<Sidebar.MenuButton {...props}>
 						<ChevronRightIcon class="transition-transform" />
 						<FolderIcon />
-						{`ui/${item.name}`}
+						{item.name}
 					</Sidebar.MenuButton>
 				{/snippet}
 			</Collapsible.Trigger>

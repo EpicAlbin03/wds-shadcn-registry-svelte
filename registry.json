@@ -5,28 +5,11 @@
 	"aliases": {
 		"lib": "$lib/registry/lib",
 		"ui": "$lib/registry/ui",
-		"components": "./components",
+		"components": "$lib/registry/components",
 		"utils": "$lib/utils",
 		"hooks": "$lib/registry/hooks"
 	},
 	"items": [
-		{
-			"name": "action-button",
-			"type": "registry:ui",
-			"description": "A button that performs an action when clicked and optionally asks for user confirmation.",
-			"dependencies": [],
-			"registryDependencies": ["button", "loading-swap", "alert-dialog"],
-			"files": [
-				{
-					"type": "registry:file",
-					"path": "src\\lib\\registry\\ui\\action-button\\action-button.svelte"
-				},
-				{
-					"type": "registry:file",
-					"path": "src\\lib\\registry\\ui\\action-button\\index.ts"
-				}
-			]
-		},
 		{
 			"name": "loading-swap",
 			"type": "registry:ui",
@@ -45,46 +28,63 @@
 			]
 		},
 		{
+			"name": "action-button",
+			"type": "registry:component",
+			"description": "A button that performs an action when clicked and optionally asks for user confirmation.",
+			"dependencies": [],
+			"registryDependencies": ["button", "loading-swap", "alert-dialog"],
+			"files": [
+				{
+					"type": "registry:file",
+					"path": "src\\lib\\registry\\components\\action-button\\action-button.svelte"
+				},
+				{
+					"type": "registry:file",
+					"path": "src\\lib\\registry\\components\\action-button\\index.ts"
+				}
+			]
+		},
+		{
 			"name": "multi-select",
-			"type": "registry:ui",
+			"type": "registry:component",
 			"description": "A multi-select input that emulates the Shadcn Select component as closely as possible.",
 			"dependencies": ["@lucide/svelte", "bits-ui", "runed"],
 			"registryDependencies": ["utils", "badge", "command", "popover"],
 			"files": [
 				{
 					"type": "registry:file",
-					"path": "src\\lib\\registry\\ui\\multi-select\\index.ts"
+					"path": "src\\lib\\registry\\components\\multi-select\\index.ts"
 				},
 				{
 					"type": "registry:file",
-					"path": "src\\lib\\registry\\ui\\multi-select\\multi-select.svelte"
+					"path": "src\\lib\\registry\\components\\multi-select\\multi-select.svelte"
 				}
 			]
 		},
 		{
 			"name": "number-input",
-			"type": "registry:ui",
+			"type": "registry:component",
 			"description": "An input that returns a number value and automatically handles invalid inputs.",
 			"dependencies": [],
 			"registryDependencies": ["utils", "input"],
 			"files": [
 				{
 					"type": "registry:file",
-					"path": "src\\lib\\registry\\ui\\number-input\\index.ts"
+					"path": "src\\lib\\registry\\components\\number-input\\index.ts"
 				},
 				{
 					"type": "registry:file",
-					"path": "src\\lib\\registry\\ui\\number-input\\number-input-group.svelte"
+					"path": "src\\lib\\registry\\components\\number-input\\number-input-group.svelte"
 				},
 				{
 					"type": "registry:file",
-					"path": "src\\lib\\registry\\ui\\number-input\\number-input.svelte"
+					"path": "src\\lib\\registry\\components\\number-input\\number-input.svelte"
 				}
 			]
 		},
 		{
 			"name": "password-input",
-			"type": "registry:ui",
+			"type": "registry:component",
 			"description": "An input that can toggle visibility of the password text and check the strength of the password.",
 			"dependencies": [
 				"@zxcvbn-ts/core",
@@ -96,15 +96,15 @@
 			"files": [
 				{
 					"type": "registry:file",
-					"path": "src\\lib\\registry\\ui\\password-input\\index.ts"
+					"path": "src\\lib\\registry\\components\\password-input\\index.ts"
 				},
 				{
 					"type": "registry:file",
-					"path": "src\\lib\\registry\\ui\\password-input\\password-input-strength-checker.svelte"
+					"path": "src\\lib\\registry\\components\\password-input\\password-input-strength-checker.svelte"
 				},
 				{
 					"type": "registry:file",
-					"path": "src\\lib\\registry\\ui\\password-input\\password-input.svelte"
+					"path": "src\\lib\\registry\\components\\password-input\\password-input.svelte"
 				}
 			]
 		}

@@ -12,7 +12,7 @@
 	import { zod4 } from 'sveltekit-superforms/adapters';
 	import * as Form from '$lib/components/ui/form/index.js';
 	import { toast } from 'svelte-sonner';
-	import { NumberInput } from '$lib/registry/ui/number-input';
+	import { NumberInput } from '$lib/registry/components/number-input';
 
 	const form = superForm(defaults(zod4(formSchema)), {
 		validators: zod4(formSchema),

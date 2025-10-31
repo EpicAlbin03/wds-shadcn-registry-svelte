@@ -11,7 +11,7 @@
 	import { zod4 } from 'sveltekit-superforms/adapters';
 	import * as Form from '$lib/components/ui/form/index.js';
 	import { toast } from 'svelte-sonner';
-	import { MultiSelect } from '$lib/registry/ui/multi-select';
+	import { MultiSelect } from '$lib/registry/components/multi-select';
 
 	const form = superForm(defaults(zod4(formSchema)), {
 		validators: zod4(formSchema),

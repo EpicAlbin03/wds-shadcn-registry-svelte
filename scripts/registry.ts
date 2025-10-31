@@ -244,11 +244,16 @@ async function crawlComponents(rootPath: string): Promise<RegistryItems> {
 	const items: RegistryItems = [];
 
 	for (const dirent of dir) {
-		if (!dirent.isFile()) continue;
+		const filepath = path.join(rootPath, dirent.name);
+		if (!dirent.isFile()) {
+			const result = await buildComponentRegistry(filepath, dirent.name);
+			items.push(result);
+			continue;
+		}
+
+		if (!dirent.name.endsWith('.svelte')) continue;
 
 		const [name] = dirent.name.split('.svelte');
-
-		const filepath = path.join(rootPath, dirent.name);
 		const source = fs.readFileSync(filepath, { encoding: 'utf8' });
 		const relativePath = path.relative(process.cwd(), filepath);
 
@@ -267,6 +272,37 @@ async function crawlComponents(rootPath: string): Promise<RegistryItems> {
 	}
 
 	return items;
+}
+
+async function buildComponentRegistry(
+	componentPath: string,
+	componentName: string
+): Promise<RegistryItems[number]> {
+	const dir = fs.readdirSync(componentPath, { withFileTypes: true, recursive: true });
+	const files: RegistryItemFiles = [];
+	const registryDependencies = new Set<string>();
+	const packageDependencies = new Set<string>();
+
+	for (const dirent of dir) {
+		if (!dirent.isFile()) continue;
+		const absPath = path.join(dirent.parentPath ?? componentPath, dirent.name);
+		const relativePath = path.relative(process.cwd(), absPath);
+		const source = fs.readFileSync(absPath, { encoding: 'utf8' });
+
+		files.push({ path: relativePath, type: 'registry:file' });
+
+		const deps = await getFileDependencies(absPath, source);
+		deps.registryDependencies.forEach((dep) => registryDependencies.add(dep));
+		deps.packageDependencies.forEach((dep) => packageDependencies.add(dep));
+	}
+
+	return {
+		type: 'registry:component',
+		files,
+		name: componentName,
+		registryDependencies: Array.from(registryDependencies),
+		dependencies: Array.from(packageDependencies)
+	} satisfies RegistryItems[number];
 }
 
 async function crawlLib(rootPath: string): Promise<RegistryItems> {
