@@ -25,7 +25,7 @@ const remarkRelativeLinks: Plugin<[], Root> = () => {
 			if (node.type === 'link' && 'url' in node) {
 				const link = node as Link;
 				if (link.url.startsWith('/')) {
-					link.url = `https://localhost:5173${link.url}`;
+					link.url = `https://wds-shadcn-registry-svelte.netlify.app${link.url}`;
 				}
 			}
 
@@ -179,7 +179,7 @@ async function createLLMsIndex(_files: FileMap) {
 	const overviewLinks: LinkData[] = gettingStarted
 		.map((item) => ({
 			name: basename(item.path),
-			path: `https://localhost:5173/${item.path}.md`,
+			path: `https://wds-shadcn-registry-svelte.netlify.app/${item.path}.md`,
 			title: item.title,
 			description: item.description
 		}))

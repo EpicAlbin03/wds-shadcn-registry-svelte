@@ -4,4 +4,6 @@
 	let { name }: { name: string } = $props();
 </script>
 
-<PMExecute command={`shadcn-svelte@latest add http://localhost:5173/registry/${name}.json`} />
+<PMExecute
+	command={`shadcn-svelte@latest add https://wds-shadcn-registry-svelte.netlify.app/registry/${name}.json`}
+/>

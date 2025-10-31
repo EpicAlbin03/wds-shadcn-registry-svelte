@@ -5,17 +5,17 @@
  </h1>
 </p>
 
-[wds-shadcn-registry-svelte](https://localhost:5173) is an unofficial community-led [Svelte](https://svelte.dev) port of [wds-shadcn-registry](https://wds-shadcn-registry.netlify.app).
+[wds-shadcn-registry-svelte](https://wds-shadcn-registry-svelte.netlify.app) is an unofficial community-led [Svelte](https://svelte.dev) port of [wds-shadcn-registry](https://wds-shadcn-registry.netlify.app).
 
 > **Note** <br> **This project is not affiliated with wds-shadcn-registry** <br>
 
 ![hero](./static/opengraph.png)
 
-[wds-shadcn-registry-svelte](https://localhost:5173) is an open-source collection of copy-and-paste shadcn components.
+[wds-shadcn-registry-svelte](https://wds-shadcn-registry-svelte.netlify.app) is an open-source collection of copy-and-paste shadcn components.
 
 ## Documentation
 
-Visit https://localhost:5173 to view the documentation.
+Visit https://wds-shadcn-registry-svelte.netlify.app to view the documentation.
 
 ## Credits
 

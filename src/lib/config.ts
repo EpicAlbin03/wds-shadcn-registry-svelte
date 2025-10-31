@@ -1,8 +1,8 @@
 export const siteConfig = {
 	name: 'wds-shadcn-registry-svelte',
-	url: 'https://localhost:5173',
+	url: 'https://wds-shadcn-registry-svelte.netlify.app',
 	ogImage: {
-		url: 'https://localhost:5173/opengraph.png',
+		url: 'https://wds-shadcn-registry-svelte.netlify.app/opengraph.png',
 		width: '1200',
 		height: '630'
 	},
