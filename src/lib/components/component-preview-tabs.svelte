@@ -67,7 +67,7 @@
 		<div
 			data-slot="preview"
 			data-active={value === 'preview'}
-			class={cn(value === 'preview' ? 'block' : 'hidden')}
+			class="hidden data-[active=true]:block"
 			data-llm-ignore
 		>
 			<div
@@ -84,10 +84,7 @@
 		<div
 			data-slot="code"
 			data-active={value === 'code'}
-			class={cn(
-				'absolute inset-0 overflow-hidden **:[figure]:!m-0 **:[pre]:h-[450px]',
-				value === 'code' ? 'block' : 'hidden'
-			)}
+			class="absolute inset-0 hidden overflow-hidden data-[active=true]:block **:[figure]:!m-0 **:[pre]:h-[450px]"
 		>
 			{@render children?.()}
 		</div>

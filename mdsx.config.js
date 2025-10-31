@@ -1,5 +1,5 @@
 // @ts-check
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import process from 'node:process';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -287,11 +287,21 @@ function rehypeHandleMetadata() {
 }
 
 function getComponentSourceFileContent(src = '') {
-	const newSrc = src.replace('../', './');
-	if (!newSrc) return null;
+	if (!src) return null;
 
-	// Read the source file.
-	const filePath = join(process.cwd(), newSrc);
+	let normalized = src.replace(/\\/g, '/');
+	if (normalized.startsWith('../')) {
+		normalized = normalized.slice(3);
+	} else if (normalized.startsWith('./')) {
+		normalized = normalized.slice(2);
+	}
+
+	if (!normalized.startsWith('src/')) {
+		normalized = `src/${normalized}`;
+	}
+
+	const filePath = join(process.cwd(), normalized);
+	if (!existsSync(filePath)) return null;
 
 	const formattedSource = prettier.format(readFileSync(filePath, 'utf-8'), codeBlockPrettierConfig);
 
