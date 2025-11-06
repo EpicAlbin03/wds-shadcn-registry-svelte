@@ -29,11 +29,7 @@ export const siteConfig = {
 		'modern ui svelte',
 		'typescript svelte components',
 		'responsive components',
-		'dark mode components',
-		'form components svelte',
-		'dashboard components',
-		'chart components svelte',
-		'svelte chart components'
+		'dark mode components'
 	],
 	links: {
 		x: 'https://x.com/EpicAlbin03',
