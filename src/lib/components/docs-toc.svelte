@@ -4,13 +4,16 @@
 		const itemIds = $derived(getItemIds().map((id) => id.replace('#', '')));
 
 		$effect(() => {
-			const observer = new IntersectionObserver((entries) => {
-				for (const entry of entries) {
-					if (entry.isIntersecting) {
-						activeId = entry.target.id;
+			const observer = new IntersectionObserver(
+				(entries) => {
+					for (const entry of entries) {
+						if (entry.isIntersecting) {
+							activeId = entry.target.id;
+						}
 					}
-				}
-			});
+				},
+				{ rootMargin: '0% 0% -80% 0%' }
+			);
 
 			for (const id of itemIds ?? []) {
 				const element = document.getElementById(id);
